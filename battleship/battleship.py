@@ -1,9 +1,10 @@
+##
 # Lesson from Codecademy.com
-#
+##
 # http://www.codecademy.com/ru/courses/python-beginner-en-4XuFm
-#
+##
 # now work with python2
-#
+##
 
 import random
 
