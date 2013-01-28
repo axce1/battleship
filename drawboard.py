@@ -1,7 +1,7 @@
 from pygame.locals import *
 import pygame
 
-GRIDLINECOLOR = (250,250,250)
+GRIDLINECOLOR = (0,0,0)
 
 WINDOWWIDTH = 710
 WINDOWHEIGHT = 350
@@ -9,11 +9,14 @@ SPACESIZE = 30
 BOARDWIDTH = 10
 BOARDHEIGHT =10
 
-XMARGIN = 30 #int((WINDOWWIDTH - (BOARDWIDTH * SPACESIZE)) / 2)
-YMARGIN = 30 #int((WINDOWHEIGHT - (BOARDHEIGHT * SPACESIZE)) / 2)
+XMARGIN = 30
+YMARGIN = 30
 
 pygame.init()
 DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
+
+boardImage = pygame.image.load('more.png')
+DISPLAYSURF.blit(boardImage,(0,0))
 
 def drawBoard(pix):
 
@@ -23,7 +26,7 @@ def drawBoard(pix):
         starty = YMARGIN
         endx = (x * SPACESIZE) + XMARGIN
         endy = YMARGIN + (BOARDHEIGHT * SPACESIZE)
-        pygame.draw.line(DISPLAYSURF, GRIDLINECOLOR,(startx+pix,starty),(endx+pix,endy))
+        pygame.draw.line(DISPLAYSURF, GRIDLINECOLOR,(startx+pix,starty),(endx+pix,endy),2)
 
     for y in range(BOARDHEIGHT + 1):
 
@@ -31,7 +34,7 @@ def drawBoard(pix):
         starty = (y * SPACESIZE) + YMARGIN
         endx = XMARGIN + (BOARDWIDTH * SPACESIZE)
         endy = (y * SPACESIZE) + YMARGIN
-        pygame.draw.line(DISPLAYSURF, GRIDLINECOLOR, (startx+pix, starty),(endx+pix,endy))
+        pygame.draw.line(DISPLAYSURF, GRIDLINECOLOR, (startx+pix, starty),(endx+pix,endy),2)
 
 
 
