@@ -1,7 +1,9 @@
 from pygame.locals import *
 import pygame
+import random
 
 GRIDLINECOLOR = (0,0,0)
+OWNSHIPCOLOR = (138,0,184)
 
 WINDOWWIDTH = 710
 WINDOWHEIGHT = 350
@@ -37,7 +39,6 @@ def drawBoard(pix):
         pygame.draw.line(DISPLAYSURF, GRIDLINECOLOR, (startx+pix, starty),(endx+pix,endy),2)
 
 
-
 def drawNotOwnBoaard(pix):
 
     for x in range(BOARDWIDTH + 1):
@@ -57,8 +58,33 @@ def drawNotOwnBoaard(pix):
         pygame.draw.line(DISPLAYSURF, GRIDLINECOLOR, (startx, starty),(endx,endy))
 
 
+def drawship(arg,deck):
+
+    '''draw own ships. arg - how much ships we need'''
+
+    for i in range(arg):
+
+        x = random.randrange(0,300,30)
+        y = random.randrange(0,300,30)
+
+        rect_1_rect = Rect((x+32,y+32),(28,28))
+
+        print x , y
+
+        if deck == 1:
+            rect_1_rect = Rect((x+32,y+32),(28,28))
+            pygame.draw.rect(DISPLAYSURF,OWNSHIPCOLOR,rect_1_rect,0)
+
+        elif deck == 2:
+            rect_1_rect = Rect((x+32,y+32),(28,58)) # vertical ship
+            pygame.draw.rect(DISPLAYSURF,OWNSHIPCOLOR,rect_1_rect,0)
+
+
+drawBoard(0)
+drawBoard(350)
+drawship(4,1)
+drawship(3,2)
+
 while True:
-    drawBoard(0)
-    drawBoard(350)
     pygame.display.update()
 
