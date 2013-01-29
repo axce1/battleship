@@ -1,6 +1,6 @@
 from pygame.locals import *
 import pygame
-import random
+import ships
 
 GRIDLINECOLOR = (0,0,0)
 OWNSHIPCOLOR = (138,0,184)
@@ -58,36 +58,41 @@ def drawNotOwnBoaard(pix):
         pygame.draw.line(DISPLAYSURF, GRIDLINECOLOR, (startx, starty),(endx,endy))
 
 
-class Ship():
-    '''class for work with ships '''
+#class Ship():
+    #'''class for work with ships '''
 
-    def drawship(self,arg,deck):
+    #def drawship(self,arg,deck):
 
-        '''draw own ships. arg - how much ships we need'''
+        #'''draw own ships. arg - how much ships we need'''
 
-        for i in range(arg):
+        #for i in range(arg):
 
-            x = random.randrange(0,300,30)
-            y = random.randrange(0,300,30)
+            #x = random.randrange(0,300,30)
+            #y = random.randrange(0,300,30)
 
-            rect_1_rect = Rect((x+32,y+32),(28,28))
+            #rect_1_rect = Rect((x+32,y+32),(28,28))
 
-            print x/30 , y/30
+            #print x/30 , y/30
 
-            if deck == 1:
-                rect_1_rect = Rect((x+32,y+32),(28,28))
-                pygame.draw.rect(DISPLAYSURF,OWNSHIPCOLOR,rect_1_rect,0)
+            #if deck == 1:
+                #rect_1_rect = Rect((x+32,y+32),(28,28))
+                #pygame.draw.rect(DISPLAYSURF,OWNSHIPCOLOR,rect_1_rect,0)
 
-            elif deck == 2:
-                rect_1_rect = Rect((x+32,y+32),(28,58)) # vertical ship
-                pygame.draw.rect(DISPLAYSURF,OWNSHIPCOLOR,rect_1_rect,0)
+            #elif deck == 2:
+                #rect_1_rect = Rect((x+32,y+32),(28,58)) # vertical ship
+                #pygame.draw.rect(DISPLAYSURF,OWNSHIPCOLOR,rect_1_rect,0)
 
 
 drawBoard(0)
 drawBoard(350)
-a = Ship()
-a.drawship(4,1)
-a.drawship(3,2)
+a = ships.Korablic()
+
+def drawAllKorablics(koralblics):
+    for kor in range(koralblics):
+        a.draw(DISPLAYSURF,OWNSHIPCOLOR)
+
+
+drawAllKorablics(20)
 
 while True:
     pygame.display.update()
