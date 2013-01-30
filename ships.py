@@ -7,22 +7,32 @@ class Korablic(object):
 
     def __init__(self):
         self.cells = set([])
+        self.nonempty = set([])
 
 
     def addCell(self, cell):
+        '''add ships to set cells'''
         self.cells.add(cell)
 
 
     def draw(self, display, color):
 
-        x = random.randrange(0,300,30)
-        y = random.randrange(0,300,30)
+        '''draw ship method'''
 
-        print x/30 , y/30
-        x_kvadrat = x/30
-        y_kvadrat = y/30
-        self.addCell((x_kvadrat,y_kvadrat))
+        while True:
+            x = random.randrange(0,300,30)
+            y = random.randrange(0,300,30)
+            if ((x/30,y/30) not in self.cells) and \
+                ((x/30, y/30) not in self.nonempty):
+                break
+
+        x_k = x/30
+        y_k = y/30
+
+        self.addCell((x_k,y_k))
+        self.addNonEmpty(x_k,y_k)
         print self.cells
+        print self.nonempty
 
         rect = Rect((y+32,x+32),(28,28))
         pygame.draw.rect(display,color,rect,0)
@@ -30,6 +40,15 @@ class Korablic(object):
     def tadish(self, cell):
         self.cells.remove(cell)
         print self.cells
+
+    def addNonEmpty(self,x,y):
+        """ add non empty space to set nonempty"""
+
+        for a in range(x-1,x+2):
+            for b in range(y-1,y+2):
+                if (a,b) != (x,y) \
+                    and (10 > a > -1) and (10 > b > -1):
+                        self.nonempty.add((a,b))
 
 
 

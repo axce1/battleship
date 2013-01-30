@@ -92,7 +92,7 @@ def drawAllKorablics(koralblics):
         a.draw(DISPLAYSURF,OWNSHIPCOLOR)
 
 
-drawAllKorablics(20)
+drawAllKorablics(5)
 
 while True:
     pygame.display.update()
