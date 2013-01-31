@@ -1,6 +1,7 @@
 from pygame.locals import *
 import pygame
 import ships
+import events
 
 GRIDLINECOLOR = (0,0,0)
 OWNSHIPCOLOR = (138,0,184)
@@ -58,29 +59,6 @@ def drawNotOwnBoaard(pix):
         pygame.draw.line(DISPLAYSURF, GRIDLINECOLOR, (startx, starty),(endx,endy))
 
 
-#class Ship():
-    #'''class for work with ships '''
-
-    #def drawship(self,arg,deck):
-
-        #'''draw own ships. arg - how much ships we need'''
-
-        #for i in range(arg):
-
-            #x = random.randrange(0,300,30)
-            #y = random.randrange(0,300,30)
-
-            #rect_1_rect = Rect((x+32,y+32),(28,28))
-
-            #print x/30 , y/30
-
-            #if deck == 1:
-                #rect_1_rect = Rect((x+32,y+32),(28,28))
-                #pygame.draw.rect(DISPLAYSURF,OWNSHIPCOLOR,rect_1_rect,0)
-
-            #elif deck == 2:
-                #rect_1_rect = Rect((x+32,y+32),(28,58)) # vertical ship
-                #pygame.draw.rect(DISPLAYSURF,OWNSHIPCOLOR,rect_1_rect,0)
 
 
 drawBoard(0)
@@ -95,5 +73,11 @@ def drawAllKorablics(koralblics):
 drawAllKorablics(5)
 
 while True:
+
+    for event in pygame.event.get():
+        if event.type == MOUSEBUTTONUP:
+            mousex, mousey = event.pos
+            print mousex, mousey
+            a.vistrel(mousex,mousey)
     pygame.display.update()
 

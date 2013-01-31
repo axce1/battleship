@@ -14,7 +14,6 @@ class Korablic(object):
         '''add ships to set cells'''
         self.cells.add(cell)
 
-
     def draw(self, display, color):
 
         '''draw ship method'''
@@ -37,9 +36,20 @@ class Korablic(object):
         rect = Rect((y+32,x+32),(28,28))
         pygame.draw.rect(display,color,rect,0)
 
-    def tadish(self, cell):
+    def  tadish(self, cell):
         self.cells.remove(cell)
         print self.cells
+        print 'delete'
+
+    def vistrel(self, x, y):
+
+        if ((y/30)-1,(x/30)-1) in self.cells:
+            print 'ta-da'
+            print y, x
+            self.tadish((((y/30)-1,(x/30)-1)))
+        else:
+            print 'loser!!!'
+
 
     def addNonEmpty(self,x,y):
         """ add non empty space to set nonempty"""
