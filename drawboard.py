@@ -1,7 +1,6 @@
 from pygame.locals import *
 import pygame
 import ships
-import events
 
 GRIDLINECOLOR = (0,0,0)
 OWNSHIPCOLOR = (138,0,184)
