@@ -59,17 +59,29 @@ def drawNotOwnBoaard(pix):
 
 
 
-
 drawBoard(0)
 drawBoard(350)
-a = ships.Korablic()
+ship1 = ships.Korablic()
+ship2 = ships.Korablic()
+ship3 = ships.Korablic()
+
+
+def allCells(k):
+    res = set ([])
+    for kor in k:
+        res = res.union(kor.cells)
+    return res
+
+
+KORABLIKY=[ship1,ship2,ship3]
+allCells(KORABLIKY)
 
 def drawAllKorablics(koralblics):
-    for kor in range(koralblics):
-        a.draw(DISPLAYSURF,OWNSHIPCOLOR)
+    for kor in koralblics:
+        kor.draw(DISPLAYSURF,OWNSHIPCOLOR)
 
 
-drawAllKorablics(5)
+drawAllKorablics(KORABLIKY)
 
 while True:
 
