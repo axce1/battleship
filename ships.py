@@ -29,9 +29,9 @@ class Korablic(object):
         #y_k = y/30
 
         #self.addCell((x_k,y_k))
-        #self.addNonEmpty(x_k,y_k)
+        self.addNonEmpty()
         print self.cells
-       # print self.nonempty
+        print self.nonempty
 
         for y, x in self.cells:
 
@@ -53,8 +53,13 @@ class Korablic(object):
             print 'loser!!!'
 
 
-    def addNonEmpty(self,x,y):
+    def addNonEmpty(self):
         """ add non empty space to set nonempty"""
+
+        for x,y in self.cells:
+            pass
+
+        print x/30,y/30
 
         for a in range(x-1,x+2):
             for b in range(y-1,y+2):
