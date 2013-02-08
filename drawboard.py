@@ -66,15 +66,28 @@ ship2 = ships.Korablic()
 ship3 = ships.Korablic()
 
 
+def place_ship():
+
+    while
+    x = random.randrange(0,300,30)
+    y = random.randrange(0,300,30)
+  #  if ((x/30,y/30) not in self.cells) and \
+        #((x/30, y/30) not in self.nonempty):
+        #break
+
+
+
 def allCells(k):
     res = set ([])
     for kor in k:
         res = res.union(kor.cells)
+    print res
     return res
 
 
 KORABLIKY=[ship1,ship2,ship3]
-allCells(KORABLIKY)
+#allCells(KORABLIKY)
+
 
 def drawAllKorablics(koralblics):
     for kor in koralblics:
