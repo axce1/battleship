@@ -1,6 +1,10 @@
+#!/usr/bin/python
+#coding: utf-8
+
 from pygame.locals import *
 import pygame
 import ships
+import random
 
 GRIDLINECOLOR = (0,0,0)
 OWNSHIPCOLOR = (138,0,184)
@@ -61,19 +65,19 @@ def drawNotOwnBoaard(pix):
 
 drawBoard(0)
 drawBoard(350)
-ship1 = ships.Korablic()
-ship2 = ships.Korablic()
-ship3 = ships.Korablic()
-
 
 def place_ship():
 
-    while
+    """
+    вычисляем координаты корабля для передачи его объекту
+    """
+
     x = random.randrange(0,300,30)
     y = random.randrange(0,300,30)
   #  if ((x/30,y/30) not in self.cells) and \
         #((x/30, y/30) not in self.nonempty):
         #break
+    return set([(x,y)])
 
 
 
@@ -85,8 +89,13 @@ def allCells(k):
     return res
 
 
+ship1 = ships.Korablic(place_ship())
+ship2 = ships.Korablic(place_ship())
+ship3 = ships.Korablic(place_ship())
+
 KORABLIKY=[ship1,ship2,ship3]
-#allCells(KORABLIKY)
+
+allCells(KORABLIKY)
 
 
 def drawAllKorablics(koralblics):

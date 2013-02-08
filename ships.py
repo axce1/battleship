@@ -5,8 +5,8 @@ from pygame.locals import *
 class Korablic(object):
     ''' class work with ships '''
 
-    def __init__(self):
-        self.cells = set([])
+    def __init__(self,sh_set):
+        self.cells = sh_set
         self.nonempty = set([])
 
 
@@ -16,25 +16,27 @@ class Korablic(object):
 
     def draw(self, display, color):
 
-        '''draw ship method'''
+      #  '''draw ship method'''
 
-        while True:
-            x = random.randrange(0,300,30)
-            y = random.randrange(0,300,30)
-            if ((x/30,y/30) not in self.cells) and \
-                ((x/30, y/30) not in self.nonempty):
-                break
+        #while True:
+            #x = random.randrange(0,300,30)
+            #y = random.randrange(0,300,30)
+            #if ((x/30,y/30) not in self.cells) and \
+                #((x/30, y/30) not in self.nonempty):
+                #break
 
-        x_k = x/30
-        y_k = y/30
+        #x_k = x/30
+        #y_k = y/30
 
-        self.addCell((x_k,y_k))
-        self.addNonEmpty(x_k,y_k)
+        #self.addCell((x_k,y_k))
+        #self.addNonEmpty(x_k,y_k)
         print self.cells
-        print self.nonempty
+       # print self.nonempty
 
-        rect = Rect((y+32,x+32),(28,28))
-        pygame.draw.rect(display,color,rect,0)
+        for y, x in self.cells:
+
+            rect = Rect((y+32,x+32),(28,28))
+            pygame.draw.rect(display,color,rect,0)
 
     def  tadish(self, cell):
         self.cells.remove(cell)
