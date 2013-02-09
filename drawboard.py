@@ -89,11 +89,12 @@ def allCells(k):
     return res
 
 
-ship1 = ships.Korablic(place_ship())
-ship2 = ships.Korablic(place_ship())
-ship3 = ships.Korablic(place_ship())
+KORABLIKY=[]
+x = 0
 
-KORABLIKY=[ship1,ship2,ship3]
+for count in range(3):
+    KORABLIKY.append(ships.Korablic(place_ship()))
+    x += 1
 
 allCells(KORABLIKY)
 
