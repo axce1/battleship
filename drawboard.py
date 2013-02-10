@@ -66,17 +66,19 @@ def drawNotOwnBoaard(pix):
 drawBoard(0)
 drawBoard(350)
 
-def place_ship():
+def place_ship(cells):
 
     """
     вычисляем координаты корабля для передачи его объекту
     """
-
-    x = random.randrange(0,300,30)
-    y = random.randrange(0,300,30)
-    #if ((x,y) not in allCells(KORABLIKY)):
-        #((x/30, y/30) not in self.nonempty):
-    #    print 'hoho'
+    while True:
+        x = random.randrange(0,300,30)
+        y = random.randrange(0,300,30)
+        if ((x,y) not in allCells(KORABLIKY)) \
+        and ((x,y) not in placeNearShip(allCells(KORABLIKY))):
+            #((x/30, y/30) not in self.nonempty):
+            print 'hoho'
+            break
     return set([(x,y)])
 
 
@@ -85,18 +87,25 @@ def allCells(k):
     res = set ([])
     for kor in k:
         res = res.union(kor.cells)
-    print res
+    #print res
     return res
 
 
+def placeNearShip(k):
+    kol = set([])
+    for x, y in k:
+        for a in range(x-30,x+60,30):
+            for b in range(y-30,y+60,30):
+                if (a,b) != (x,y):
+                    kol.add((a,b))
+    return kol
+
+
 KORABLIKY=[]
-x = 0
 
-for count in range(3):
-    KORABLIKY.append(ships.Korablic(place_ship()))
-    x += 1
+for count in range(10):
+    KORABLIKY.append(ships.Korablic(place_ship(allCells(KORABLIKY))))
 
-allCells(KORABLIKY)
 
 
 def drawAllKorablics(koralblics):
@@ -105,6 +114,9 @@ def drawAllKorablics(koralblics):
 
 
 drawAllKorablics(KORABLIKY)
+
+print allCells(KORABLIKY)
+print placeNearShip(allCells(KORABLIKY))
 
 while True:
 

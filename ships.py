@@ -1,4 +1,3 @@
-import random
 import pygame
 from pygame.locals import *
 
@@ -18,27 +17,13 @@ class Korablic(object):
 
       #  '''draw ship method'''
 
-        #while True:
-            #x = random.randrange(0,300,30)
-            #y = random.randrange(0,300,30)
-            #if ((x/30,y/30) not in self.cells) and \
-                #((x/30, y/30) not in self.nonempty):
-                #break
-
-        #x_k = x/30
-        #y_k = y/30
-
-        #self.addCell((x_k,y_k))
-        self.addNonEmpty()
-        print self.cells
-        print self.nonempty
 
         for y, x in self.cells:
 
             rect = Rect((y+32,x+32),(28,28))
             pygame.draw.rect(display,color,rect,0)
 
-    def  tadish(self, cell):
+    def tadish(self, cell):
         self.cells.remove(cell)
         print self.cells
         print 'delete'
