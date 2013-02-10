@@ -75,7 +75,7 @@ def place_ship(cells):
         x = random.randrange(0,300,30)
         y = random.randrange(0,300,30)
         if ((x,y) not in allCells(KORABLIKY)) \
-        and ((x,y) not in placeNearShip(allCells(KORABLIKY))):
+        and ((x,y) not in placeNearShip()):
             #((x/30, y/30) not in self.nonempty):
             print 'hoho'
             break
@@ -91,9 +91,9 @@ def allCells(k):
     return res
 
 
-def placeNearShip(k):
+def placeNearShip():
     kol = set([])
-    for x, y in k:
+    for x, y in allCells(KORABLIKY):
         for a in range(x-30,x+60,30):
             for b in range(y-30,y+60,30):
                 if (a,b) != (x,y):
@@ -116,7 +116,7 @@ def drawAllKorablics(koralblics):
 drawAllKorablics(KORABLIKY)
 
 print allCells(KORABLIKY)
-print placeNearShip(allCells(KORABLIKY))
+print placeNearShip()
 
 while True:
 
