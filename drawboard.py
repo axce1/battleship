@@ -75,9 +75,7 @@ def place_ship(cells):
         x = random.randrange(0,300,30)
         y = random.randrange(0,300,30)
         if ((x,y) not in allCells(KORABLIKY)) \
-        and ((x,y) not in placeNearShip()):
-            #((x/30, y/30) not in self.nonempty):
-            print 'hoho'
+            and ((x,y) not in placeNearShip()):
             break
     return set([(x,y)])
 
