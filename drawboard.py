@@ -100,18 +100,19 @@ def drawAllKorablics(koralblics):
 
 
 def tadish(x,y):
-    pygame.draw.line(DISPLAYSURF, (0, 0, 255), ((x*30)+59, 59+(y*30)), ((x*30)+32, (y*30)+32), 3)
-    pygame.draw.line(DISPLAYSURF, (0, 0, 255), ((x*30)+64, (y*30)+32), ((x*30)+32, (y*30)+64), 3)
+    pygame.draw.line(DISPLAYSURF, (0, 0, 255), ((x*30)+79, 59+(y*30)), ((x*30)+52, (y*30)+32), 3)
+    pygame.draw.line(DISPLAYSURF, (0, 0, 255), ((x*30)+84, (y*30)+32), ((x*30)+52, (y*30)+64), 3)
     print "удаляем кораблик"
-    for i,j in enumerate(KORABLIKY):
+    for i,j in enumerate(EnemyKORABLIKY):
         if (x,y) in j.cells:
-            del KORABLIKY[i]
+            del EnemyKORABLIKY[i]
 
 
 def vistrel(x, y):
-    x = x/30 - 1
+    x = x/30 - 2
     y = y/30 - 1
-    if (x,y) in allCells(KORABLIKY):
+    print x, y
+    if (x,y) in allEnemyCells(EnemyKORABLIKY):
         tadish(x,y)
     else: print "you are miss!"
 
@@ -172,7 +173,7 @@ for c in range(10):
     EnemyKORABLIKY.append(ships.Korablic(enemyPlaceShip(allEnemyCells(EnemyKORABLIKY))))
 
 drawAllEnemyKorablics(EnemyKORABLIKY)
-
+print allEnemyCells(EnemyKORABLIKY)
 while True:
 
     for event in pygame.event.get():
@@ -181,6 +182,7 @@ while True:
             sys.exit()
         if event.type == MOUSEBUTTONUP:
             mousex, mousey = event.pos
+            print mousex, mousey
             vistrel(mousex,mousey)
     pygame.display.update()
 
