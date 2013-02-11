@@ -81,7 +81,6 @@ def allCells(k):
     res = set ([])
     for kor in k:
         res = res.union(kor.cells)
-    #print res
     return res
 
 
@@ -117,6 +116,43 @@ def vistrel(x, y):
     else: print "you are miss!"
 
 
+
+####### Enemy Block #######
+
+def enemyPlaceShip(cells):
+
+    while True:
+       y = (random.randrange(0,300,30))/30
+       x = (random.randrange(350,650,30))/30
+
+       if ((x,y) not in allEnemyCells(EnemyKORABLIKY)) \
+               and ((x,y) not in placeNearEnemyShip()):
+           break
+    return set([(x,y)])
+
+
+def allEnemyCells(k):
+    spa = set ([])
+    for ekor in k:
+        spa = spa.union(ekor.cells)
+    return spa
+
+
+def placeNearEnemyShip():
+    kol = set([])
+    for x, y in allEnemyCells(EnemyKORABLIKY):
+        for a in range(x-1,x+2):
+            for b in range(y-1,y+2):
+                if (a,b) != (x,y):
+                    kol.add((a,b))
+    return kol
+
+
+def drawAllEnemyKorablics(koralblics):
+    for k in koralblics:
+        k.drawEnemy(DISPLAYSURF,OWNSHIPCOLOR)
+
+
 drawBoard(0)
 drawBoard(350)
 
@@ -127,6 +163,15 @@ for count in range(10):
 
 
 drawAllKorablics(KORABLIKY)
+
+### рисуем корабли вражины
+
+EnemyKORABLIKY=[]
+
+for c in range(10):
+    EnemyKORABLIKY.append(ships.Korablic(enemyPlaceShip(allEnemyCells(EnemyKORABLIKY))))
+
+drawAllEnemyKorablics(EnemyKORABLIKY)
 
 while True:
 
