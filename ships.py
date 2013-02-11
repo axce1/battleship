@@ -20,7 +20,7 @@ class Korablic(object):
 
         for y, x in self.cells:
 
-            rect = Rect((y+32,x+32),(28,28))
+            rect = Rect(((y*30)+32,(x*30)+32),(28,28))
             pygame.draw.rect(display,color,rect,0)
 
     def tadish(self, cell):

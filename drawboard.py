@@ -62,23 +62,18 @@ def drawNotOwnBoaard(pix):
         pygame.draw.line(DISPLAYSURF, GRIDLINECOLOR, (startx, starty),(endx,endy))
 
 
-
-drawBoard(0)
-drawBoard(350)
-
 def place_ship(cells):
 
     """
     вычисляем координаты корабля для передачи его объекту
     """
     while True:
-        x = random.randrange(0,300,30)
-        y = random.randrange(0,300,30)
+        x = (random.randrange(0,300,30))/30
+        y = (random.randrange(0,300,30))/30
         if ((x,y) not in allCells(KORABLIKY)) \
             and ((x,y) not in placeNearShip()):
             break
     return set([(x,y)])
-
 
 
 def allCells(k):
@@ -92,18 +87,11 @@ def allCells(k):
 def placeNearShip():
     kol = set([])
     for x, y in allCells(KORABLIKY):
-        for a in range(x-30,x+60,30):
-            for b in range(y-30,y+60,30):
+        for a in range(x-1,x+2):
+            for b in range(y-1,y+2):
                 if (a,b) != (x,y):
                     kol.add((a,b))
     return kol
-
-
-KORABLIKY=[]
-
-for count in range(10):
-    KORABLIKY.append(ships.Korablic(place_ship(allCells(KORABLIKY))))
-
 
 
 def drawAllKorablics(koralblics):
@@ -111,17 +99,39 @@ def drawAllKorablics(koralblics):
         kor.draw(DISPLAYSURF,OWNSHIPCOLOR)
 
 
-drawAllKorablics(KORABLIKY)
+def tadish(x,y):
+    pygame.draw.line(DISPLAYSURF, (0, 0, 255), ((x*30)+59, 59+(y*30)), ((x*30)+32, (y*30)+32), 3)
+    pygame.draw.line(DISPLAYSURF, (0, 0, 255), ((x*30)+64, (y*30)+32), ((x*30)+32, (y*30)+64), 3)
+    print "удаляем кораблик"
+    for i,j in enumerate(KORABLIKY):
+        if (x,y) in j.cells:
+            del KORABLIKY[i]
 
-print allCells(KORABLIKY)
-print placeNearShip()
+
+def vistrel(x, y):
+    x = x/30 - 1
+    y = y/30 - 1
+    if (x,y) in allCells(KORABLIKY):
+        tadish(x,y)
+    else: print "you are miss!"
+
+
+drawBoard(0)
+drawBoard(350)
+
+KORABLIKY=[]
+
+for count in range(10):
+    KORABLIKY.append(ships.Korablic(place_ship(allCells(KORABLIKY))))
+
+
+drawAllKorablics(KORABLIKY)
 
 while True:
 
     for event in pygame.event.get():
         if event.type == MOUSEBUTTONUP:
             mousex, mousey = event.pos
-            print mousex, mousey
-            a.vistrel(mousex,mousey)
+            vistrel(mousex,mousey)
     pygame.display.update()
 
