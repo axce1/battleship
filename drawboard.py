@@ -3,8 +3,9 @@
 
 from pygame.locals import *
 import pygame
-import ships
 import random
+import ships
+import sys
 
 GRIDLINECOLOR = (0,0,0)
 OWNSHIPCOLOR = (138,0,184)
@@ -130,6 +131,9 @@ drawAllKorablics(KORABLIKY)
 while True:
 
     for event in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
         if event.type == MOUSEBUTTONUP:
             mousex, mousey = event.pos
             vistrel(mousex,mousey)
