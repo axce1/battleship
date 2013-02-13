@@ -112,20 +112,22 @@ def drawAllKorablics(koralblics):
 
 def tadish(x,y):
 
-    for i,j in enumerate(EnemyKORABLIKY):
+    for j in EnemyKORABLIKY:
 
         if (x,y) in j.cells and len((j.cells))==1:
 
-            EnemyKORABLIKY[i].drawEnemy(DISPLAYSURF,OWNSHIPCOLOR)
+            j.drawShip(DISPLAYSURF,OWNSHIPCOLOR, y, x)
+            pygame.display.update()
             image = pygame.image.load("explosion.png")
             DISPLAYSURF.blit(image, ((x*30)+50,(y*30)+20))
             pygame.display.update()
-            del EnemyKORABLIKY[i]
+            EnemyKORABLIKY.remove(j)
             print "удаляем кораблик"
 
         elif (x,y) in j.cells and len((j.cells)) != 1:
 
-            EnemyKORABLIKY[i].drawEnemy(DISPLAYSURF,OWNSHIPCOLOR)
+            j.drawShip(DISPLAYSURF,OWNSHIPCOLOR, y, x)
+            pygame.display.update()
             image = pygame.image.load("explosion.png")
             DISPLAYSURF.blit(image, ((x*30)+50,(y*30)+20))
             pygame.display.update()
@@ -205,15 +207,19 @@ drawAllKorablics(KORABLIKY)
 
 EnemyKORABLIKY=[]
 
-for c in range(20):
+for c in range(2):
     EnemyKORABLIKY.append(ships.Korablic(enemyPlaceShip(allEnemyCells(EnemyKORABLIKY), 1)))
 
-for c in range(1):
+for c in range(5):
     EnemyKORABLIKY.append(ships.Korablic(enemyPlaceShip(allEnemyCells(EnemyKORABLIKY), 2)))
 
-drawAllEnemyKorablics(EnemyKORABLIKY)
+#drawAllEnemyKorablics(EnemyKORABLIKY)
 print allEnemyCells(EnemyKORABLIKY)
 print placeNearEnemyShip()
+
+#x = set([(19, 8)])
+#a = ships.Korablic(x)
+#a.drawShip(DISPLAYSURF,OWNSHIPCOLOR, 10, 15)
 
 while True:
 

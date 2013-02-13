@@ -19,6 +19,10 @@ class Korablic(object):
             rect = Rect(((y*30)+32,(x*30)+32),(28,28))
             pygame.draw.rect(display,color,rect,0)
 
+    def drawShip(self,display, color, x, y):
+        rect = Rect(((y*30)+52,(x*30)+32),(28,28))
+        pygame.draw.rect(display,color,rect,0)
+
 
     def drawEnemy(self, display, color):
 
