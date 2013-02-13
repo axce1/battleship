@@ -1,1 +1,2 @@
-Python battleship from codecademy.
+Python and PyGame Battleship
+
