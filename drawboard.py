@@ -104,8 +104,9 @@ def tadish(x,y):
     for i,j in enumerate(EnemyKORABLIKY):
         if (x,y) in j.cells:
             EnemyKORABLIKY[i].drawEnemy(DISPLAYSURF,OWNSHIPCOLOR)
-            pygame.draw.line(DISPLAYSURF, (0, 0, 255), ((x*30)+79, 59+(y*30)), ((x*30)+52, (y*30)+32), 3)
-            pygame.draw.line(DISPLAYSURF, (0, 0, 255), ((x*30)+84, (y*30)+32), ((x*30)+52, (y*30)+64), 3)
+            image = pygame.image.load("explosion.png")
+            DISPLAYSURF.blit(image, ((x*30)+50,(y*30)+20))
+            pygame.display.update()
             del EnemyKORABLIKY[i]
 
 
