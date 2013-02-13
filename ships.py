@@ -15,13 +15,12 @@ class Korablic(object):
     def draw(self, display, color):
       #  '''draw ship method'''
 
-      for y, x in self.cells:
-          rect = Rect(((y*30)+32,(x*30)+32),(28,28))
-          pygame.draw.rect(display,color,rect,0)
+        for y, x in self.cells:
+            rect = Rect(((y*30)+32,(x*30)+32),(28,28))
+            pygame.draw.rect(display,color,rect,0)
 
 
     def drawEnemy(self, display, color):
-        #  '''draw ship method'''
 
         for y, x in self.cells:
             rect = Rect(((y*30)+52,(x*30)+32),(28,28))

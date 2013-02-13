@@ -63,18 +63,29 @@ def drawNotOwnBoaard(pix):
         pygame.draw.line(DISPLAYSURF, GRIDLINECOLOR, (startx, starty),(endx,endy))
 
 
-def place_ship(cells):
+def place_ship(cells, deck):
 
     """
     вычисляем координаты корабля для передачи его объекту
     """
-    while True:
-        x = (random.randrange(0,300,30))/30
-        y = (random.randrange(0,300,30))/30
-        if ((x,y) not in allCells(KORABLIKY)) \
-            and ((x,y) not in placeNearShip()):
-            break
-    return set([(x,y)])
+    if deck == 1:
+        while True:
+            x = (random.randrange(0,300,30))/30
+            y = (random.randrange(0,300,30))/30
+            if ((x,y) not in allCells(KORABLIKY)) \
+                and ((x,y) not in placeNearShip()):
+                break
+        return set([(x,y)])
+
+    if deck == 2:
+        while True:
+            x = (random.randrange(0,300,30))/30
+            y = (random.randrange(0,300,30))/30
+            if ((x,y) not in allCells(KORABLIKY)) \
+                and ((x,y) not in placeNearShip()):
+                break
+        '''дописатьсать генерацию второй палубы '''
+        return set([(x,y),(x+1,y)])
 
 
 def allCells(k):
@@ -100,14 +111,26 @@ def drawAllKorablics(koralblics):
 
 
 def tadish(x,y):
-    print "удаляем кораблик"
+
     for i,j in enumerate(EnemyKORABLIKY):
-        if (x,y) in j.cells:
+
+        if (x,y) in j.cells and len((j.cells))==1:
+
             EnemyKORABLIKY[i].drawEnemy(DISPLAYSURF,OWNSHIPCOLOR)
             image = pygame.image.load("explosion.png")
             DISPLAYSURF.blit(image, ((x*30)+50,(y*30)+20))
             pygame.display.update()
             del EnemyKORABLIKY[i]
+            print "удаляем кораблик"
+
+        elif (x,y) in j.cells and len((j.cells)) != 1:
+
+            EnemyKORABLIKY[i].drawEnemy(DISPLAYSURF,OWNSHIPCOLOR)
+            image = pygame.image.load("explosion.png")
+            DISPLAYSURF.blit(image, ((x*30)+50,(y*30)+20))
+            pygame.display.update()
+            j.cells.remove((x,y))
+            print "раненый кораблик, пичалько"
 
 
 def vistrel(x, y):
@@ -122,16 +145,25 @@ def vistrel(x, y):
 
 ####### Enemy Block #######
 
-def enemyPlaceShip(cells):
+def enemyPlaceShip(cells, deck):
 
-    while True:
-       y = (random.randrange(0,300,30))/30
-       x = (random.randrange(350,650,30))/30
+    if deck == 1:
+        while True:
+            y = (random.randrange(0,300,30))/30
+            x = (random.randrange(350,650,30))/30
+            if ((x,y) not in allEnemyCells(EnemyKORABLIKY)) \
+                    and ((x,y) not in placeNearEnemyShip()):
+                break
+        return set([(x,y)])
 
-       if ((x,y) not in allEnemyCells(EnemyKORABLIKY)) \
-               and ((x,y) not in placeNearEnemyShip()):
-           break
-    return set([(x,y)])
+    if deck == 2:
+        while True:
+            y = (random.randrange(0,300,30))/30
+            x = (random.randrange(350,600,30))/30
+            if ((x,y) not in allEnemyCells(EnemyKORABLIKY)) \
+                and ((x,y) not in placeNearEnemyShip()):
+                break
+        return set([(x,y),(x+1,y)])
 
 
 def allEnemyCells(k):
@@ -161,9 +193,11 @@ drawBoard(350)
 
 KORABLIKY=[]
 
-for count in range(10):
-    KORABLIKY.append(ships.Korablic(place_ship(allCells(KORABLIKY))))
+for count in range(20):
+    KORABLIKY.append(ships.Korablic(place_ship(allCells(KORABLIKY), 1)))
 
+for count in range(1):
+    KORABLIKY.append(ships.Korablic(place_ship(allCells(KORABLIKY), 2)))
 
 drawAllKorablics(KORABLIKY)
 
@@ -171,12 +205,15 @@ drawAllKorablics(KORABLIKY)
 
 EnemyKORABLIKY=[]
 
-for c in range(10):
-    EnemyKORABLIKY.append(ships.Korablic(enemyPlaceShip(allEnemyCells(EnemyKORABLIKY))))
+for c in range(20):
+    EnemyKORABLIKY.append(ships.Korablic(enemyPlaceShip(allEnemyCells(EnemyKORABLIKY), 1)))
 
-#drawAllEnemyKorablics(EnemyKORABLIKY)
+for c in range(1):
+    EnemyKORABLIKY.append(ships.Korablic(enemyPlaceShip(allEnemyCells(EnemyKORABLIKY), 2)))
+
+drawAllEnemyKorablics(EnemyKORABLIKY)
 print allEnemyCells(EnemyKORABLIKY)
-
+print placeNearEnemyShip()
 
 while True:
 
