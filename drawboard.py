@@ -116,7 +116,8 @@ def tadish(x,y):
 
         if (x,y) in j.cells and len((j.cells))==1:
 
-            j.drawShip(DISPLAYSURF,OWNSHIPCOLOR, y, x)
+#            j.drawShip(DISPLAYSURF,OWNSHIPCOLOR, y, x)
+            ships.Korablic.tadish1((x,y))
             pygame.display.update()
             image = pygame.image.load("explosion.png")
             DISPLAYSURF.blit(image, ((x*30)+50,(y*30)+20))
@@ -126,7 +127,7 @@ def tadish(x,y):
 
         elif (x,y) in j.cells and len((j.cells)) != 1:
 
-            j.drawShip(DISPLAYSURF,OWNSHIPCOLOR, y, x)
+ #           j.drawShip(DISPLAYSURF,OWNSHIPCOLOR, y, x)
             pygame.display.update()
             image = pygame.image.load("explosion.png")
             DISPLAYSURF.blit(image, ((x*30)+50,(y*30)+20))
@@ -210,8 +211,8 @@ EnemyKORABLIKY=[]
 for c in range(2):
     EnemyKORABLIKY.append(ships.Korablic(enemyPlaceShip(allEnemyCells(EnemyKORABLIKY), 1)))
 
-for c in range(5):
-    EnemyKORABLIKY.append(ships.Korablic(enemyPlaceShip(allEnemyCells(EnemyKORABLIKY), 2)))
+#for c in range(5):
+#    EnemyKORABLIKY.append(ships.Korablic(enemyPlaceShip(allEnemyCells(EnemyKORABLIKY), 2)))
 
 #drawAllEnemyKorablics(EnemyKORABLIKY)
 print allEnemyCells(EnemyKORABLIKY)
