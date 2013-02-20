@@ -30,8 +30,6 @@ class workShip(object):
             ship.addCell(self.generPlaceShip())
             self.korabli.append(ship)
 
-        print 'done!'
-        print self.korabli
         return self.korabli
 
     def generPlaceShip(self, k=0):
@@ -71,9 +69,3 @@ class workShip(object):
         return self.kol
 
 
-a = workShip()
-
-a.createListShips()
-
-print a.shipCells()
-#a.hoho()
