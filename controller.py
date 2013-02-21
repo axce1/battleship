@@ -9,8 +9,10 @@ GRIDLINECOLOR = (0,0,0)
 OWNSHIPCOLOR = (61,139,255)
 ENEMYSHIPCOLOR = (138,0,184)
 
-WINDOWWIDTH = 710
-WINDOWHEIGHT = 350
+#color = OWNSHIPCOLOR
+
+WINDOWWIDTH = 720
+WINDOWHEIGHT = 360
 SPACESIZE = 30
 BOARDWIDTH = 10
 BOARDHEIGHT =10
@@ -44,18 +46,15 @@ def drawBoard(pix=0):
 
 
 def drawShip(display, color, ship):
-   # print ship.cells
 
-    for y, x in ship.cells:
-#        print ('выводим координаты')
-#        print y, x
+    for x, y in ship.cells:
         rect = Rect(((y*30)+32,(x*30)+32),(28,28))
         pygame.draw.rect(display,color,rect,0)
 
 
-def drawAllShip(korablics) :
+def drawAllShip(korablics, color) :
     for k in korablics:
-        drawShip(DISPLAYSURF, OWNSHIPCOLOR, k)
+        drawShip(DISPLAYSURF, color, k)
 
 
 #drawBoard()

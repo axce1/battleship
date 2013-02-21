@@ -4,19 +4,24 @@ import model
 import pygame
 import sys
 
+owncolor = controller.OWNSHIPCOLOR
+enemycolor = controller.ENEMYSHIPCOLOR
+
 controller.drawBoard()
-controller.drawBoard(350)
+controller.drawBoard(360)
 
 ownship = model.workShip()
 enemyship = model.workShip()
 
 OwnListShip = ownship.createListShips()
-EnemyListShip = enemyship.createListShips()
+EnemyListShip = enemyship.createListShips(360)
 
 print OwnListShip
 
-controller.drawAllShip(OwnListShip)
-controller.drawAllShip(EnemyListShip)
+
+
+controller.drawAllShip(OwnListShip, owncolor)
+controller.drawAllShip(EnemyListShip, enemycolor)
 
 while True:
 
