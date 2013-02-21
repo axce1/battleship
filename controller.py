@@ -47,7 +47,7 @@ def drawBoard(pix=0):
 
 def drawShip(display, color, ship):
 
-    for x, y in ship.cells:
+    for x,y in ship.cells:
         rect = Rect(((y*30)+32,(x*30)+32),(28,28))
         pygame.draw.rect(display,color,rect,0)
 
@@ -57,12 +57,4 @@ def drawAllShip(korablics, color) :
         drawShip(DISPLAYSURF, color, k)
 
 
-#drawBoard()
 
-#while True:
-
-    #for event in pygame.event.get():
-        #if event.type == QUIT:
-            #pygame.quit()
-            #sys.exit()
-    #pygame.display.update()
