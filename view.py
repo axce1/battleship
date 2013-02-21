@@ -13,8 +13,8 @@ controller.drawBoard(360)
 ownship = model.workShip()
 enemyship = model.workShip()
 
-OwnListShip = ownship.createListShips(4,2)
-EnemyListShip = enemyship.createListShips(4,2,360)
+OwnListShip = ownship.createListShips()
+EnemyListShip = enemyship.createListShips(360)
 
 controller.drawAllShip(OwnListShip, owncolor)
 controller.drawAllShip(EnemyListShip, enemycolor)

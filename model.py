@@ -24,10 +24,15 @@ class workShip(object):
     def __init__(self):
         self.korabli=[]
 
-    def createListShips(self, x, deck, k=0):
-        for c in range(x):
+    def createListShips(self, k=0):
+        for c in range(4):
             ship = Korablic()
-            ship.addCell(self.generPlaceShip(deck, k))
+            ship.addCell(self.generPlaceShip(1, k))
+            self.korabli.append(ship)
+
+        for q in range(3):
+            ship = Korablic()
+            ship.addCell(self.generPlaceShip(2, k))
             self.korabli.append(ship)
 
         return self.korabli
