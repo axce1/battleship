@@ -27,7 +27,8 @@ class workShip(object):
     def createListShips(self):
         for c in range(5):
             ship = Korablic()
-            ship.addCell(self.generPlaceShip())
+          #  ship.addCell(self.generPlaceShip())
+            ship.addCell(self.genShipPlace())
             self.korabli.append(ship)
 
         return self.korabli
@@ -47,10 +48,10 @@ class workShip(object):
 
     def shipCells(self):
 
-        self.spa = set([])
+        spa = set([])
         for ekor in self.korabli:
-            self.spa = self.spa.union(ekor.cells)
-        return self.spa
+            spa = spa.union(ekor.cells)
+        return spa
 
     def hoho(self):
         self.hui = set([])
@@ -60,12 +61,22 @@ class workShip(object):
 
     def placeNearShip(self):
 
-        self.kol = set([])
+        kol = set([])
         for x,y in self.shipCells():
             for a in range(x-1,x+2):
                 for b in range(y-1,y+2):
                     if (a,b) != (x,y):
-                        self.kol.add((a,b))
-        return self.kol
+                        kol.add((a,b))
+        return kol
 
+    def genShipPlace(self):
 
+        allspace = set([])
+        for i in range(0,10):
+            for j in range(0,10):
+                allspace.add((i,j))
+
+        space = allspace - (self.shipCells().union(self.placeNearShip()))
+        ship = random.sample(space, 1)
+        print ship[0]
+        return ship[0]
