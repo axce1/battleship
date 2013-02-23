@@ -1,4 +1,5 @@
 from pygame.locals import *
+from time import sleep
 import controller
 import model
 import pygame
@@ -27,6 +28,7 @@ while True:
             sys.exit()
         if event.type == MOUSEBUTTONUP:
             mousex, mousey = event.pos
-    pygame.display.update()
+        pygame.display.update()
+    sleep(0.05)
 
 
