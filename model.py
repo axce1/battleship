@@ -10,7 +10,7 @@ class Korablic(object):
         self.nonempty = set([])
 
     def addCell(self, cell):
-        self.cells = cell
+        self.cells.add(cell)
 
     def tadish(self, cell):
         pass
@@ -24,11 +24,12 @@ class workShip(object):
     def __init__(self):
         self.korabli=[]
 
-    def createListShips(self, k=0):
-        for c in range(4):
+    def createListShips(self):
+        for c in range(5):
             ship = Korablic()
           #  ship.addCell(self.generPlaceShip())
             ship.addCell(self.genShipPlace())
+            self.korabli.append(ship)
 
         return self.korabli
 
@@ -75,14 +76,12 @@ class workShip(object):
 
         return set([(x,y),(q,w)])
 
-
     def shipCells(self):
 
         spa = set([])
         for ekor in self.korabli:
             spa = spa.union(ekor.cells)
         return spa
-
 
     def placeNearShip(self):
 
@@ -104,5 +103,4 @@ class workShip(object):
 
         space = allspace - (self.shipCells().union(self.placeNearShip()))
         ship = random.sample(space, 1)
-        print ship[0]
         return ship[0]
