@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 import random
 
 class Korablic(object):
@@ -10,7 +10,10 @@ class Korablic(object):
         self.nonempty = set([])
 
     def addCell(self, cell):
-        self.cells.add(cell)
+        if isinstance(cell, set):
+            self.cells = self.cells.union(cell)
+        else:
+            self.cells.add(cell)
 
     def tadish(self, cell):
         pass
@@ -24,24 +27,28 @@ class workShip(object):
     def __init__(self):
         self.korabli=[]
 
-    def createListShips(self, k):
+    def createListShips(self):
 
-        if k == 'own':
-            for c in range(5):
-                ship = Korablic()
-                ship.addCell(self.genShipPlace(k))
-                self.korabli.append(ship)
+        
+        for c in range(4):
+            ship = Korablic()
+            ship.addCell(self.genShipPlace())
+            self.korabli.append(ship)
+            
+        for c in range(3):
+            ship = Korablic()
+            ship.addCell(self.genDeckShip(2))
+            self.korabli.append(ship)
+                
+        for c in range(2):
+            ship = Korablic()
+            ship.addCell(self.genDeckShip(3))
+            self.korabli.append(ship)
 
-        #    for c in range(3):
-                #ship = Korablic()
-                #ship.addCell(self.gen2deckship())
-                #self.korabli.append(ship)
-
-        elif k == 'enemy':
-             for c in range(5):
-                ship = Korablic()
-                ship.addCell(self.genShipPlace(k))
-                self.korabli.append(ship)
+        for c in range(1):
+            ship = Korablic()
+            ship.addCell(self.genDeckShip(4))
+            self.korabli.append(ship)
 
         return self.korabli
 
@@ -56,53 +63,80 @@ class workShip(object):
 
         kol = set([])
         for x,y in self.shipCells():
-          #  for x,y in j:
             for a in range(x-1,x+2):
                 for b in range(y-1,y+2):
                     if (a,b) != (x,y):
                         kol.add((a,b))
         return kol
 
-    def genShipPlace(self, k):
+    def genShipPlace(self):
 
         allspace = set([])
 
-        if k == 'own':
-            for i in range(0,10):
-                for j in range(0,10):
-                    allspace.add((i,j))
+        for i in range(0,10):
+            for j in range(0,10):
+                allspace.add((i,j))
 
             space = allspace - (self.shipCells().union(self.placeNearShip()))
             ship = random.sample(space, 1)
 
-        elif k == 'enemy':
-            for i in range(0,10):
-                for j in range(12,22):
-                    allspace.add((i,j))
-
-            space = allspace - (self.shipCells().union(self.placeNearShip()))
-            ship = random.sample(space, 1)
 
         return ship[0]
 
-    def gen2deckship(self):
+    def genDeckShip(self, deck):
 
         allspace = set([])
         for i in range(0,10):
             for j in  range(0,10):
                 allspace.add((i,j))
-        space = allspace - (self.shipCells().union(self.placeNearShip()))
+                space = allspace - (self.shipCells().union(self.placeNearShip()))
 
         shiplist = []
         for x, y in space:
-            z = set([])
-            z.add((x,y))
-            z.add((x,y+1))
-            shiplist.append(z)
+            z = self.generaciyaZ(x,y,deck)
+            for i in z:
+                if i.issubset(space):
+                    shiplist.append(i)
 
         deck2ship = random.sample(shiplist,1)[0]
+        print 'отладка для особо одаренных'
         print deck2ship
         return deck2ship
 
+
+    def generaciyaZ(self, x, y, deck):
+        if deck == 2:
+            z = set([])
+            w = set([])
+            z.add((x,y))
+            z.add((x,y+1))
+            w.add((x,y))
+            w.add((x+1,y))
+            return [z,w]
+
+        elif deck == 3:
+            z = set([])
+            w = set([])
+            z.add((x,y))
+            z.add((x,y+1))
+            z.add((x,y+2))
+            w.add((x,y))
+            w.add((x+1,y))
+            w.add((x+2,y))
+            return [z,w]
+
+        elif deck == 4:
+            z = set([])
+            w = set([])
+            z.add((x,y))
+            z.add((x,y+1))
+            z.add((x,y+2))
+            z.add((x,y+3))
+            w.add((x,y))
+            w.add((x+1,y))
+            w.add((x+2,y))
+            w.add((x+3,y))
+            return [z,w]
+        
 
 

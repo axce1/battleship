@@ -45,16 +45,22 @@ def drawBoard(pix=0):
         pygame.draw.line(DISPLAYSURF, GRIDLINECOLOR, (startx+pix, starty),(endx+pix,endy),2)
 
 
-def drawShip(display, color, ship):
-
+def drawShip(display, color, ship, pix):
+    print ship.cells
     for x,y in ship.cells:
-        rect = Rect(((y*30)+32,(x*30)+32),(28,28))
+        rect = Rect(((y*30+pix)+32,(x*30)+32),(28,28))
         pygame.draw.rect(display,color,rect,0)
 
 
-def drawAllShip(korablics, color) :
+def drawAllShip(korablics, color, q) :
+    if q == 'own':
+        pizda = 0
+    else:
+        pizda = 360
     for k in korablics:
-        drawShip(DISPLAYSURF, color, k)
+        drawShip(DISPLAYSURF, color, k, pizda)
+        
+    
 
 
 
