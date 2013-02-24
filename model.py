@@ -32,6 +32,11 @@ class workShip(object):
                 ship.addCell(self.genShipPlace(k))
                 self.korabli.append(ship)
 
+        #    for c in range(3):
+                #ship = Korablic()
+                #ship.addCell(self.gen2deckship())
+                #self.korabli.append(ship)
+
         elif k == 'enemy':
              for c in range(5):
                 ship = Korablic()
@@ -79,3 +84,25 @@ class workShip(object):
             ship = random.sample(space, 1)
 
         return ship[0]
+
+    def gen2deckship(self):
+
+        allspace = set([])
+        for i in range(0,10):
+            for j in  range(0,10):
+                allspace.add((i,j))
+        space = allspace - (self.shipCells().union(self.placeNearShip()))
+
+        shiplist = []
+        for x, y in space:
+            z = set([])
+            z.add((x,y))
+            z.add((x,y+1))
+            shiplist.append(z)
+
+        deck2ship = random.sample(shiplist,1)[0]
+        print deck2ship
+        return deck2ship
+
+
+
