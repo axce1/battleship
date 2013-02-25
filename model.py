@@ -7,7 +7,7 @@ class Korablic(object):
 
     def  __init__(self):
         self.cells = set ([])
-        self.nonempty = set([])
+        self.hitspace = set([])
 
     def addCell(self, cell):
         if isinstance(cell, set):
@@ -16,10 +16,14 @@ class Korablic(object):
             self.cells.add(cell)
 
     def tadish(self, cell):
-        pass
+        self.cells.remove(cell)
+        if len(self.cells) != 0:
+            self.hitspace.add(cell)
+        else:
+            self.isDead()
 
-    def isDead(self,cell):
-        pass
+    def isDead(self):
+        print 'korablik mertvii'
 
 
 class workShip(object):
