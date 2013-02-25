@@ -1,7 +1,7 @@
 import model
 
 def vistrel(ship,x,y):
-    x = (x-380)/30
+    x = (x-390)/30
     y = y/30 - 1
     print x,y
     for i in ship:
