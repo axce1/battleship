@@ -1,15 +1,15 @@
 from pygame.locals import *
 from time import sleep
-import controller
+import view
 import model
 import pygame
 import sys
 
-owncolor = controller.OWNSHIPCOLOR
-enemycolor = controller.ENEMYSHIPCOLOR
+owncolor = view.OWNSHIPCOLOR
+enemycolor = view.ENEMYSHIPCOLOR
 
-controller.drawBoard()
-controller.drawBoard(360)
+view.drawBoard()
+view.drawBoard(360)
 
 ownship = model.workShip()
 enemyship = model.workShip()
@@ -17,8 +17,8 @@ enemyship = model.workShip()
 OwnListShip = ownship.createListShips()
 EnemyListShip = enemyship.createListShips()
 
-controller.drawAllShip(OwnListShip, owncolor, 'own')
-controller.drawAllShip(EnemyListShip, enemycolor, 'enemy')
+view.drawAllShip(OwnListShip, owncolor, 'own')
+view.drawAllShip(EnemyListShip, enemycolor, 'enemy')
 
 while True:
 
