@@ -29,25 +29,24 @@ class workShip(object):
 
     def createListShips(self):
 
-        
-        for c in range(4):
+        for c in range(1):
             ship = Korablic()
-            ship.addCell(self.genShipPlace())
+            ship.addCell(self.genDeckShip(4))
             self.korabli.append(ship)
-            
+
         for c in range(3):
             ship = Korablic()
             ship.addCell(self.genDeckShip(2))
             self.korabli.append(ship)
-                
+
         for c in range(2):
             ship = Korablic()
             ship.addCell(self.genDeckShip(3))
             self.korabli.append(ship)
 
-        for c in range(1):
+        for c in range(4):
             ship = Korablic()
-            ship.addCell(self.genDeckShip(4))
+            ship.addCell(self.genShipPlace())
             self.korabli.append(ship)
 
         return self.korabli
@@ -99,8 +98,6 @@ class workShip(object):
                     shiplist.append(i)
 
         deck2ship = random.sample(shiplist,1)[0]
-        print 'отладка для особо одаренных'
-        print deck2ship
         return deck2ship
 
 
@@ -137,6 +134,4 @@ class workShip(object):
             w.add((x+2,y))
             w.add((x+3,y))
             return [z,w]
-        
-
 
