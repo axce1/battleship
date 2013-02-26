@@ -53,14 +53,13 @@ class workShip(object):
             ship.addCell(self.genShipPlace())
             self.korabli.append(ship)
 
-       # return self.korabli
-
 
     def delFromKorabli(self, x, y):
         for i in self.korabli:
             if (y,x) in i.cells:
                 i.tadish((y,x))
                 print 'pizdec'
+                return 0
 
 
     def shipCells(self):

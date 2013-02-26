@@ -60,6 +60,7 @@ def drawAllShip(korablics, color, q) :
         drawShip(DISPLAYSURF, color, k, pizda)
 
 
-
+def drawEnemyShip():
+    pass
 
 
