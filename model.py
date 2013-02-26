@@ -104,38 +104,28 @@ class workShip(object):
         deck2ship = random.sample(shiplist,1)[0]
         return deck2ship
 
-
     def generaciyaZ(self, x, y, deck):
         if deck == 2:
             z = set([])
             w = set([])
-            z.add((x,y))
-            z.add((x,y+1))
-            w.add((x,y))
-            w.add((x+1,y))
+            for i in range(2):
+                z.add((x,y+i))
+                w.add((x+i,y))
             return [z,w]
 
         elif deck == 3:
             z = set([])
             w = set([])
-            z.add((x,y))
-            z.add((x,y+1))
-            z.add((x,y+2))
-            w.add((x,y))
-            w.add((x+1,y))
-            w.add((x+2,y))
+            for i in range(3):
+                z.add((x,y+i))
+                w.add((x+i,y))
             return [z,w]
 
         elif deck == 4:
             z = set([])
             w = set([])
-            z.add((x,y))
-            z.add((x,y+1))
-            z.add((x,y+2))
-            z.add((x,y+3))
-            w.add((x,y))
-            w.add((x+1,y))
-            w.add((x+2,y))
-            w.add((x+3,y))
+            for i in range(4):
+                z.add((x,y+i))
+                w.add((x+i,y))
             return [z,w]
 
