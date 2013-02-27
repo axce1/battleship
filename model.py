@@ -16,11 +16,10 @@ class Korablic(object):
             self.cells.add(cell)
 
     def tadish(self, cell):
+        self.hitspace.add(cell)
+        a = self.hitspace
         self.cells.remove(cell)
-        if len(self.cells) != 0:
-            self.hitspace.add(cell)
-        else:
-            self.isDead()
+
 
     def isDead(self):
         print 'korablik mertvii'
@@ -56,10 +55,10 @@ class workShip(object):
 
     def delFromKorabli(self, x, y):
         for i in self.korabli:
-            if (y,x) in i.cells:
-                i.tadish((y,x))
+            if (x,y) in i.cells:
+                i.tadish((x,y))
                 print 'pizdec'
-                return 0
+                return 'tada'
 
 
     def shipCells(self):

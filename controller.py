@@ -1,8 +1,10 @@
-#import main
+import view
 
-def vistrel(ship,x,y):
-    x = (x-390)/30
-    y = y/30 - 1
-    print x,y
-    if ship.delFromKorabli(x,y) == 0:
-        print 'hvost'
+def vistrel(z, ship, mx, my):
+    x = (mx-390)/30
+    y = my/30 - 1
+    if z.delFromKorabli(x,y) == 'tada':
+        view.drawEnemyShip(view.DISPLAYSURF,ship, x,y)
+    else:
+        print 'mozilla'
+
