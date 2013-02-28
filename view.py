@@ -60,10 +60,16 @@ def drawAllShip(korablics, color, q) :
         drawShip(DISPLAYSURF, color, k, pizda)
 
 
-def drawEnemyShip(display, ship,x,y ,pix=360):
-    for k in ship:
+def drawEnemyShip(display, ships, x, y ,pix=360):
+    for k in ships.korabli:
         if (x,y) in k.hitspace:
             rect = Rect(((x*30+pix)+32,(y*30)+32),(28,28))
             pygame.draw.rect(display, ENEMYSHIPCOLOR,rect,0)
 
+
+def reDrawAll(korablics, ship, color, q, display, x, y, pix=360):
+    drawBoard()
+    drawBoard(360)
+    drawAllShip(korablics, color, q)
+    drawEnemyShip(display,ship, x, y, pix=360)
 

@@ -32,7 +32,7 @@ while True:
             sys.exit()
         if event.type == MOUSEBUTTONUP:
             mousex, mousey = event.pos
-            controller.vistrel(enemyship, enemyship.korabli, mousex, mousey)
+            controller.vistrel(ownship.korabli, enemyship, mousex, mousey)
         pygame.display.update()
     sleep(0.05)
 
