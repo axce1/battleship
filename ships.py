@@ -1,62 +1,137 @@
-import pygame
-from pygame.locals import *
+# -*- coding: utf-8 -*-
+import random
 
 class Korablic(object):
-    ''' class work with ships '''
+    ''' class work with ships
+    '''
 
-    def __init__(self,sh_set):
-        self.cells = sh_set
-        self.nonempty = set([])
+    def  __init__(self):
+        self.cells = set ([])
+        self.hitspace = set([])
 
     def addCell(self, cell):
-        '''add ships to set cells'''
-        self.cells.add(cell)
-
-    def draw(self, display, color):
-      #  '''draw ship method'''
-
-      for y, x in self.cells:
-          rect = Rect(((y*30)+32,(x*30)+32),(28,28))
-          pygame.draw.rect(display,color,rect,0)
-
-
-    def drawEnemy(self, display, color):
-        #  '''draw ship method'''
-
-        for y, x in self.cells:
-            rect = Rect(((y*30)+52,(x*30)+32),(28,28))
-            pygame.draw.rect(display,color,rect,0)
-
+        if isinstance(cell, set):
+            self.cells = self.cells.union(cell)
+        else:
+            self.cells.add(cell)
 
     def tadish(self, cell):
+        self.hitspace.add(cell)
+        a = self.hitspace
         self.cells.remove(cell)
-        print self.cells
-        print 'delete'
-
-    def vistrel(self, x, y):
-
-        if ((y/30)-1,(x/30)-1) in self.cells:
-            print 'ta-da'
-            print y, x
-            self.tadish((((y/30)-1,(x/30)-1)))
-        else:
-            print 'loser!!!'
 
 
-    def addNonEmpty(self):
-        """ add non empty space to set nonempty"""
-
-        for x,y in self.cells:
-            pass
-
-        print x/30,y/30
-
-        for a in range(x-1,x+2):
-            for b in range(y-1,y+2):
-                if (a,b) != (x,y) \
-                    and (10 > a > -1) and (10 > b > -1):
-                        self.nonempty.add((a,b))
+    def isDead(self):
+        print 'korablik mertvii'
 
 
+class workShip(object):
 
+    def __init__(self):
+        self.korabli=[]
+
+    def createListShips(self):
+
+        for c in range(1):
+            ship = Korablic()
+            ship.addCell(self.genDeckShip(4))
+            self.korabli.append(ship)
+
+        for c in range(3):
+            ship = Korablic()
+            ship.addCell(self.genDeckShip(2))
+            self.korabli.append(ship)
+
+        for c in range(2):
+            ship = Korablic()
+            ship.addCell(self.genDeckShip(3))
+            self.korabli.append(ship)
+
+        for c in range(4):
+            ship = Korablic()
+            ship.addCell(self.genShipPlace())
+            self.korabli.append(ship)
+
+
+    def delFromKorabli(self, x, y):
+        for i in self.korabli:
+            if (x,y) in i.cells:
+                i.tadish((x,y))
+                print 'pizdec'
+                return 'tada'
+
+
+    def shipCells(self):
+
+        spa = set([])
+        for ekor in self.korabli:
+            spa = spa.union(ekor.cells)
+        return spa
+
+    def placeNearShip(self):
+
+        kol = set([])
+        for x,y in self.shipCells():
+            for a in range(x-1,x+2):
+                for b in range(y-1,y+2):
+                    if (a,b) != (x,y):
+                        kol.add((a,b))
+        return kol
+
+    def genShipPlace(self):
+
+        allspace = set([])
+
+        for i in range(0,10):
+            for j in range(0,10):
+                allspace.add((i,j))
+
+            space = allspace - (self.shipCells().union(self.placeNearShip()))
+            ship = random.sample(space, 1)
+
+
+        return ship[0]
+
+    def genDeckShip(self, deck):
+
+        allspace = set([])
+        for i in range(0,10):
+            for j in  range(0,10):
+                allspace.add((i,j))
+                space = allspace - (self.shipCells().union(self.placeNearShip()))
+
+        shiplist = []
+        for x, y in space:
+            z = self.generaciyaZ(x,y,deck)
+            for i in z:
+                if i.issubset(space):
+                    shiplist.append(i)
+
+        deck2ship = random.sample(shiplist,1)[0]
+        return deck2ship
+
+    def generaciyaZ(self, x, y, deck):
+        if deck == 2:
+            z = set([])
+            w = set([])
+            for i in range(2):
+                z.add((x,y+i))
+                w.add((x+i,y))
+            return [z,w]
+
+        elif deck == 3:
+            z = set([])
+            w = set([])
+            for i in range(3):
+                z.add((x,y+i))
+                w.add((x+i,y))
+            return [z,w]
+
+        elif deck == 4:
+            z = set([])
+            w = set([])
+            for i in range(4):
+                z.add((x,y+i))
+                w.add((x+i,y))
+            return [z,w]
 
