@@ -3,7 +3,6 @@
 
 from pygame.locals import *
 import pygame
-import sys
 
 GRIDLINECOLOR = (0,0,0)
 OWNSHIPCOLOR = (61,139,255)
@@ -26,6 +25,9 @@ DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
 boardImage = pygame.image.load('data/sea.png')
 DISPLAYSURF.blit(boardImage,(0,0))
 
+shipImage = pygame.image.load('data/ship.png')
+shipImage = pygame.transform.scale(shipImage, (30,32))
+
 def drawBoard(pix=0):
 
     for x in range(BOARDWIDTH + 1):
@@ -46,9 +48,15 @@ def drawBoard(pix=0):
 
 
 def drawShip(display, color, ship, pix):
-    for x,y in ship.cells:
-        rect = Rect(((y*30+pix)+32,(x*30)+32),(28,28))
-        pygame.draw.rect(display,color,rect,0)
+
+    if len(ship.cells) == 1:
+        x,y = list(ship.cells)[0]
+        ship_place = ((y*30+pix)+30,(x*30)+30)
+        DISPLAYSURF.blit(shipImage,ship_place)
+    else:
+        for x,y in ship.cells:
+            rect = Rect(((y*30+pix)+32,(x*30)+32),(28,28))
+            pygame.draw.rect(display,color,rect,0)
 
 
 def drawAllShip(korablics, color, q) :
