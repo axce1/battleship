@@ -25,8 +25,9 @@ DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
 boardImage = pygame.image.load('data/sea.png')
 DISPLAYSURF.blit(boardImage,(0,0))
 
-shipImage = pygame.image.load('data/ship.png')
-shipImage = pygame.transform.scale(shipImage, (30,32))
+#shipImage = pygame.image.load('data/ship.png')
+#shipImage = pygame.transform.scale(shipImage, (30,62))
+#DISPLAYSURF.blit(shipImage,(0,0))
 
 def drawBoard(pix=0):
 
@@ -49,10 +50,61 @@ def drawBoard(pix=0):
 
 def drawShip(display, color, ship, pix):
 
+    shipImage = pygame.image.load('data/ship.png')
+
     if len(ship.cells) == 1:
         x,y = list(ship.cells)[0]
         ship_place = ((y*30+pix)+30,(x*30)+30)
+        shipImage = pygame.transform.scale(shipImage, (30,30))
         DISPLAYSURF.blit(shipImage,ship_place)
+    elif len(ship.cells) == 2:
+        x,y = min(list(ship.cells))
+        ship_place = ((y*30+pix)+30,(x*30)+30)
+        x_list = []
+        y_list = []
+        for x,y in ship.cells:
+            x_list.append(x)
+            y_list.append(y)
+        if x_list[0] == x_list[1]:
+            shipImage = pygame.transform.scale(shipImage,(30,60))
+            shipImage = pygame.transform.rotate(shipImage, 90)
+            DISPLAYSURF.blit(shipImage,ship_place)
+        else:
+            shipImage = pygame.transform.scale(shipImage,(30,60))
+            DISPLAYSURF.blit(shipImage,ship_place)
+
+    elif len(ship.cells) == 3:
+        x,y = min(list(ship.cells))
+        ship_place = ((y*30+pix)+30,(x*30)+30)
+        x_list = []
+        y_list = []
+        for x,y in ship.cells:
+            x_list.append(x)
+            y_list.append(y)
+        if x_list[0] == x_list[1]:
+            shipImage = pygame.transform.scale(shipImage,(30,90))
+            shipImage = pygame.transform.rotate(shipImage, 90)
+            DISPLAYSURF.blit(shipImage,ship_place)
+        else:
+            shipImage = pygame.transform.scale(shipImage,(30,90))
+            DISPLAYSURF.blit(shipImage,ship_place)
+
+    elif len(ship.cells) == 4:
+        x,y = min(list(ship.cells))
+        ship_place = ((y*30+pix)+30,(x*30)+30)
+        x_list = []
+        y_list = []
+        for x,y in ship.cells:
+            x_list.append(x)
+            y_list.append(y)
+        if x_list[0] == x_list[1]:
+            shipImage = pygame.transform.scale(shipImage,(30,120))
+            shipImage = pygame.transform.rotate(shipImage, 90)
+            DISPLAYSURF.blit(shipImage,ship_place)
+        else:
+            shipImage = pygame.transform.scale(shipImage,(30,120))
+            DISPLAYSURF.blit(shipImage,ship_place)
+
     else:
         for x,y in ship.cells:
             rect = Rect(((y*30+pix)+32,(x*30)+32),(28,28))
