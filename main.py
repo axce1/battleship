@@ -18,7 +18,7 @@ enemyship = ships.workShip()
 OwnListShip = ownship.createListShips()
 EnemyListShip = enemyship.createListShips()
 
-draw.drawAllShip(ownship.korabli, owncolor, 'own')
+draw.drawAllShip(ownship)
 #draw.drawAllShip(enemyship.korabli, enemycolor, 'enemy')
 
 for i in enemyship.korabli:
@@ -32,7 +32,8 @@ while True:
             sys.exit()
         if event.type == MOUSEBUTTONUP:
             mousex, mousey = event.pos
-            control.vistrel(ownship.korabli, enemyship, mousex, mousey)
+            control.vistrel(ownship, enemyship, mousex, mousey)
+            control.compTurn(enemyship,ownship)
         pygame.display.update()
     sleep(0.05)
 

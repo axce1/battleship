@@ -8,8 +8,6 @@ GRIDLINECOLOR = (0,0,0)
 OWNSHIPCOLOR = (61,139,255)
 ENEMYSHIPCOLOR = (138,0,184)
 
-#color = OWNSHIPCOLOR
-
 WINDOWWIDTH = 720
 WINDOWHEIGHT = 360
 SPACESIZE = 30
@@ -25,6 +23,8 @@ DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
 boardImage = pygame.image.load('data/sea.png')
 DISPLAYSURF.blit(boardImage,(0,0))
 
+boardImage = pygame.image.load('/tmp/buum.png')
+DISPLAYSURF.blit(boardImage,(30,30))
 
 def drawBoard(pix=0):
 
@@ -45,7 +45,7 @@ def drawBoard(pix=0):
         pygame.draw.line(DISPLAYSURF, GRIDLINECOLOR, (startx+pix, starty),(endx+pix,endy),2)
 
 
-def drawShip(display, color, ship, pix=0):
+def drawShip(display, ship, pix=0):
 
     shipImage = pygame.image.load('data/ship.png')
 
@@ -105,13 +105,9 @@ def drawShip(display, color, ship, pix=0):
             DISPLAYSURF.blit(shipImage,ship_place)
 
 
-def drawAllShip(korablics, color, q) :
-    if q == 'own':
-        pizda = 0
-    else:
-        pizda = 360
-    for k in korablics:
-        drawShip(DISPLAYSURF, color, k, pizda)
+def drawAllShip(ship) :
+    for k in ship.korabli:
+        drawShip(DISPLAYSURF, k)
 
 
 def drawExplosion(display, ships, x, y ,pix=360):
@@ -125,17 +121,22 @@ def drawExplosion(display, ships, x, y ,pix=360):
 def drawDeadShip(ship):
     for k in ship.korabli:
         if len(k.cells) == 0:
-            drawShip(DISPLAYSURF,ENEMYSHIPCOLOR,k,360)
+            drawShip(DISPLAYSURF,k,360)
         for (x,y) in k.hitspace:
             explosion = pygame.image.load('data/explosion.png')
             place = ((y*30+360)+33,(x*30)+25)
             DISPLAYSURF.blit(explosion,place)
 
 
-def reDrawAll(korablics, ship, color, q, display, x, y, pix=360):
+def drawBum(x,y):
+    bumImage = pygame.image.load('data/bum.png')
+    DISPLAYSURF.blit(bumImage,(x,y))
+
+def reDrawAll(ownship, enemyship, display, x, y):
     drawBoard()
     drawBoard(360)
-    drawAllShip(korablics, color, q)
-    drawExplosion(display,ship,x, y ,pix=360)
-    drawDeadShip(ship)
+    drawAllShip(ownship)
+    drawExplosion(display,ownship,x,y,0)
+    drawExplosion(display,enemyship,x, y,360)
+    drawDeadShip(enemyship)
 
