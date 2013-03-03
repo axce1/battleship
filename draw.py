@@ -122,13 +122,13 @@ def drawExplosion(display, ships, x, y ,pix=360):
             DISPLAYSURF.blit(explosion,place)
 
 
-def drawDeadShip(ship):
+def drawDeadShip(ship,pix):
     for k in ship.korabli:
         if len(k.cells) == 0:
-            drawShip(DISPLAYSURF,ENEMYSHIPCOLOR,k,360)
+            drawShip(DISPLAYSURF,ENEMYSHIPCOLOR,k,pix)
         for (x,y) in k.hitspace:
             explosion = pygame.image.load('data/explosion.png')
-            place = ((y*30+360)+33,(x*30)+25)
+            place = ((y*30+pix)+33,(x*30)+25)
             DISPLAYSURF.blit(explosion,place)
 
 
@@ -136,6 +136,6 @@ def reDrawAll(korablics, ship, color, q, display, x, y, pix=360):
     drawBoard()
     drawBoard(360)
     drawAllShip(korablics, color, q)
-    drawExplosion(display,ship,x, y ,pix=360)
-    drawDeadShip(ship)
+    drawExplosion(display,ship,x, y)
+    drawDeadShip(ship,360)
 
