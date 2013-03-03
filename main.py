@@ -21,8 +21,8 @@ EnemyListShip = enemyship.createListShips()
 draw.drawAllShip(ownship.korabli, owncolor, 'own')
 #draw.drawAllShip(enemyship.korabli, enemycolor, 'enemy')
 
-#for i in enemyship.korabli:
-#    print i.cells
+for i in enemyship.korabli:
+    print i.cells
 
 while True:
 

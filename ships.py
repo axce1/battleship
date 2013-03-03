@@ -19,10 +19,12 @@ class Korablic(object):
         self.hitspace.add(cell)
         a = self.hitspace
         self.cells.remove(cell)
+        z = self.cells
 
 
     def isDead(self):
-        print 'korablik mertvii'
+        if len(self.cells) == 0:
+            print 'korablik mertvii'
 
 
 class workShip(object):

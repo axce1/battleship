@@ -25,9 +25,6 @@ DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
 boardImage = pygame.image.load('data/sea.png')
 DISPLAYSURF.blit(boardImage,(0,0))
 
-#shipImage = pygame.image.load('data/ship.png')
-#shipImage = pygame.transform.scale(shipImage, (30,62))
-#DISPLAYSURF.blit(shipImage,(0,0))
 
 def drawBoard(pix=0):
 
@@ -48,21 +45,23 @@ def drawBoard(pix=0):
         pygame.draw.line(DISPLAYSURF, GRIDLINECOLOR, (startx+pix, starty),(endx+pix,endy),2)
 
 
-def drawShip(display, color, ship, pix):
+def drawShip(display, color, ship, pix=0):
 
     shipImage = pygame.image.load('data/ship.png')
 
-    if len(ship.cells) == 1:
-        x,y = list(ship.cells)[0]
+    cell = ship.hitspace.union(ship.cells)
+
+    if len(cell) == 1:
+        x,y = list(cell)[0]
         ship_place = ((y*30+pix)+30,(x*30)+30)
         shipImage = pygame.transform.scale(shipImage, (30,30))
         DISPLAYSURF.blit(shipImage,ship_place)
-    elif len(ship.cells) == 2:
-        x,y = min(list(ship.cells))
+    elif len(cell) == 2:
+        x,y = min(list(cell))
         ship_place = ((y*30+pix)+30,(x*30)+30)
         x_list = []
         y_list = []
-        for x,y in ship.cells:
+        for x,y in cell:
             x_list.append(x)
             y_list.append(y)
         if x_list[0] == x_list[1]:
@@ -73,12 +72,12 @@ def drawShip(display, color, ship, pix):
             shipImage = pygame.transform.scale(shipImage,(30,60))
             DISPLAYSURF.blit(shipImage,ship_place)
 
-    elif len(ship.cells) == 3:
-        x,y = min(list(ship.cells))
+    elif len(cell) == 3:
+        x,y = min(list(cell))
         ship_place = ((y*30+pix)+30,(x*30)+30)
         x_list = []
         y_list = []
-        for x,y in ship.cells:
+        for x,y in cell:
             x_list.append(x)
             y_list.append(y)
         if x_list[0] == x_list[1]:
@@ -89,12 +88,12 @@ def drawShip(display, color, ship, pix):
             shipImage = pygame.transform.scale(shipImage,(30,90))
             DISPLAYSURF.blit(shipImage,ship_place)
 
-    elif len(ship.cells) == 4:
-        x,y = min(list(ship.cells))
+    elif len(cell) == 4:
+        x,y = min(list(cell))
         ship_place = ((y*30+pix)+30,(x*30)+30)
         x_list = []
         y_list = []
-        for x,y in ship.cells:
+        for x,y in cell:
             x_list.append(x)
             y_list.append(y)
         if x_list[0] == x_list[1]:
@@ -104,11 +103,6 @@ def drawShip(display, color, ship, pix):
         else:
             shipImage = pygame.transform.scale(shipImage,(30,120))
             DISPLAYSURF.blit(shipImage,ship_place)
-
-    else:
-        for x,y in ship.cells:
-            rect = Rect(((y*30+pix)+32,(x*30)+32),(28,28))
-            pygame.draw.rect(display,color,rect,0)
 
 
 def drawAllShip(korablics, color, q) :
@@ -120,16 +114,28 @@ def drawAllShip(korablics, color, q) :
         drawShip(DISPLAYSURF, color, k, pizda)
 
 
-def drawEnemyShip(display, ships, x, y ,pix=360):
+def drawExplosion(display, ships, x, y ,pix=360):
     for k in ships.korabli:
         if (x,y) in k.hitspace:
-            rect = Rect(((x*30+pix)+32,(y*30)+32),(28,28))
-            pygame.draw.rect(display, ENEMYSHIPCOLOR,rect,0)
+            explosion = pygame.image.load('data/explosion.png')
+            place = ((y*30+pix)+33,(x*30)+25)
+            DISPLAYSURF.blit(explosion,place)
+
+
+def drawDeadShip(ship):
+    for k in ship.korabli:
+        if len(k.cells) == 0:
+            drawShip(DISPLAYSURF,ENEMYSHIPCOLOR,k,360)
+        for (x,y) in k.hitspace:
+            explosion = pygame.image.load('data/explosion.png')
+            place = ((y*30+360)+33,(x*30)+25)
+            DISPLAYSURF.blit(explosion,place)
 
 
 def reDrawAll(korablics, ship, color, q, display, x, y, pix=360):
     drawBoard()
     drawBoard(360)
     drawAllShip(korablics, color, q)
-    drawEnemyShip(display,ship, x, y, pix=360)
+    drawExplosion(display,ship,x, y ,pix=360)
+    drawDeadShip(ship)
 
