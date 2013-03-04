@@ -135,7 +135,7 @@ def drawAllShip(ship) :
         drawShip(DISPLAYSURF, k)
 
 
-def drawExplosion(display, ships, x, y ,pix=360):
+def drawExplosion(display, ships, x, y ,pix):
     for k in ships.korabli:
         if (x,y) in k.hitspace:
             explosion = pygame.image.load('data/explosion.png')
@@ -154,11 +154,7 @@ def drawDeadShip(ship):
 
 
 def drawBum(ship,x,y,pix=0):
-    #for k in ship.korabli:
-        #if (x,y) not in k.cells \
-            #and (x,y) not in k.hitspace:
-        print ship.shipCells()
-        if (x,y) not in ship.shipCells():
+        for (x,y) in ship.bumspace:
             bumImage = pygame.image.load('data/bum.png')
             place = ((y*30+pix)+30,(x*30)+30)
             DISPLAYSURF.blit(bumImage,place)
@@ -166,9 +162,11 @@ def drawBum(ship,x,y,pix=0):
 
 def reDrawAll(ownship, enemyship, display, x, y):
     drawBoard()
-    drawBoard(360)
     drawAllShip(ownship)
+    drawBum(ownship,x,y)
+    drawBum(enemyship,x,y,360)
     drawExplosion(display,ownship,x,y,0)
-    drawExplosion(display,enemyship,x, y,360)
+    drawExplosion(display,enemyship,x,y,360)
     drawDeadShip(enemyship)
+    #drawDeadShip(ownship)
 

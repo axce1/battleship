@@ -31,6 +31,7 @@ class workShip(object):
 
     def __init__(self):
         self.korabli=[]
+        self.bumspace = set([])
 
     def createListShips(self):
 
@@ -59,9 +60,10 @@ class workShip(object):
         for i in self.korabli:
             if (x,y) in i.cells:
                 i.tadish((x,y))
-                print 'pizdec'
                 return 'tada'
 
+    def bumSpace(self,x,y):
+        self.bumspace.add((x,y))
 
     def shipCells(self):
 
