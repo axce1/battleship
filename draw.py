@@ -23,9 +23,6 @@ DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
 boardImage = pygame.image.load('data/sea.png')
 DISPLAYSURF.blit(boardImage,(0,0))
 
-boardImage = pygame.image.load('/tmp/buum.png')
-DISPLAYSURF.blit(boardImage,(30,30))
-
 def drawBoard(pix=0):
 
     for x in range(BOARDWIDTH + 1):
@@ -128,9 +125,15 @@ def drawDeadShip(ship):
             DISPLAYSURF.blit(explosion,place)
 
 
-def drawBum(x,y):
-    bumImage = pygame.image.load('data/bum.png')
-    DISPLAYSURF.blit(bumImage,(x,y))
+def drawBum(ship,x,y,pix=0):
+    #for k in ship.korabli:
+        #if (x,y) not in k.cells \
+            #and (x,y) not in k.hitspace:
+        print ship.shipCells()
+        if (x,y) not in ship.shipCells():
+            bumImage = pygame.image.load('data/bum.png')
+            place = ((y*30+pix)+30,(x*30)+30)
+            DISPLAYSURF.blit(bumImage,place)
 
 def reDrawAll(ownship, enemyship, display, x, y):
     drawBoard()

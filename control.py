@@ -15,7 +15,8 @@ def vistrel(ownship, ship, mx, my):
 def compTurn(enemyship,ship):
     x = random.randint(0,9)
     y = random.randint(0,9)
-    draw.drawBum(x*30,y*30)
+
+    draw.drawBum(ship,x,y)
 
     print x,y
 
