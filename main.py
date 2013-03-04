@@ -9,8 +9,8 @@ import sys
 owncolor = draw.OWNSHIPCOLOR
 enemycolor = draw.ENEMYSHIPCOLOR
 
+draw.showStartScreen()
 draw.drawBoard()
-draw.drawBoard(360)
 
 ownship = ships.workShip()
 enemyship = ships.workShip()

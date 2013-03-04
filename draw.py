@@ -3,6 +3,7 @@
 
 from pygame.locals import *
 import pygame
+import control
 
 GRIDLINECOLOR = (0,0,0)
 OWNSHIPCOLOR = (61,139,255)
@@ -20,26 +21,53 @@ YMARGIN = 30
 pygame.init()
 DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
 
-boardImage = pygame.image.load('data/sea.png')
-DISPLAYSURF.blit(boardImage,(0,0))
 
-def drawBoard(pix=0):
+def showStartScreen():
+    titleFont = pygame.font.Font('freesansbold.ttf',50)
+    titleSurf1 = titleFont.render('Start Cool Game?',True, ENEMYSHIPCOLOR)
+    titleRect = titleSurf1.get_rect()
+    titleRect.center = (WINDOWWIDTH/2, WINDOWHEIGHT/2)
+    DISPLAYSURF.blit(titleSurf1,titleRect)
+    while True:
+        if control.checkForKeyPress():
+            pygame.event.get()
+            return
+        pygame.display.update()
+
+
+def drawBoard():
+
+    boardImage = pygame.image.load('data/sea.png')
+    DISPLAYSURF.blit(boardImage,(0,0))
 
     for x in range(BOARDWIDTH + 1):
-
+        ## draw left
         startx = (x * SPACESIZE) + XMARGIN
         starty = YMARGIN
         endx = (x * SPACESIZE) + XMARGIN
         endy = YMARGIN + (BOARDHEIGHT * SPACESIZE)
-        pygame.draw.line(DISPLAYSURF, GRIDLINECOLOR,(startx+pix,starty),(endx+pix,endy),2)
+        pygame.draw.line(DISPLAYSURF, GRIDLINECOLOR,(startx,starty),(endx,endy),2)
+        ## draw left
+        startx = (x * SPACESIZE) + XMARGIN
+        starty = YMARGIN
+        endx = (x * SPACESIZE) + XMARGIN
+        endy = YMARGIN + (BOARDHEIGHT * SPACESIZE)
+        pygame.draw.line(DISPLAYSURF, GRIDLINECOLOR,(startx+360,starty),(endx+360,endy),2)
+
 
     for y in range(BOARDHEIGHT + 1):
-
+        ## draw left
         startx = XMARGIN
         starty = (y * SPACESIZE) + YMARGIN
         endx = XMARGIN + (BOARDWIDTH * SPACESIZE)
         endy = (y * SPACESIZE) + YMARGIN
-        pygame.draw.line(DISPLAYSURF, GRIDLINECOLOR, (startx+pix, starty),(endx+pix,endy),2)
+        pygame.draw.line(DISPLAYSURF, GRIDLINECOLOR, (startx, starty),(endx,endy),2)
+        ## draw right
+        startx = XMARGIN
+        starty = (y * SPACESIZE) + YMARGIN
+        endx = XMARGIN + (BOARDWIDTH * SPACESIZE)
+        endy = (y * SPACESIZE) + YMARGIN
+        pygame.draw.line(DISPLAYSURF, GRIDLINECOLOR, (startx+360, starty),(endx+360,endy),2)
 
 
 def drawShip(display, ship, pix=0):
@@ -134,6 +162,7 @@ def drawBum(ship,x,y,pix=0):
             bumImage = pygame.image.load('data/bum.png')
             place = ((y*30+pix)+30,(x*30)+30)
             DISPLAYSURF.blit(bumImage,place)
+
 
 def reDrawAll(ownship, enemyship, display, x, y):
     drawBoard()
