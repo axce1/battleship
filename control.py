@@ -7,19 +7,21 @@ def vistrel(ownship, ship, mx, my):
     y = (mx-390)/30
     x = my/30 - 1
     ship.delFromKorabli(x,y)
-    ship.bumSpace(x,y)
-    draw.reDrawAll(ownship, ship, draw.DISPLAYSURF, x, y)
+    for i in ship.korabli:
+        if (x,y) not in i.hitspace:
+            ship.bumspace.add((x,y))
+    draw.reDrawAll(ownship, ship, draw.DISPLAYSURF)
 
 
 def compTurn(enemyship,ship):
     x = random.randint(0,9)
     y = random.randint(0,9)
 
-    if ship.delFromKorabli(x,y)== 'tada':
-        print '1'
-    else:
-        ship.bumSpace(x,y)
-    draw.reDrawAll(ship,enemyship,draw.DISPLAYSURF,x,y)
+    ship.delFromKorabli(x,y)
+    for i in ship.korabli:
+        if (x,y) not in i.hitspace:
+            ship.bumSpace(x,y)
+    draw.reDrawAll(ship,enemyship,draw.DISPLAYSURF)
 
 
 def checkForKeyPress():
