@@ -20,6 +20,8 @@ EnemyListShip = enemyship.createListShips()
 
 draw.drawAllShip(ownship)
 
+waitInput = True
+
 while True:
 
     for event in pygame.event.get():
@@ -28,8 +30,12 @@ while True:
             sys.exit()
         if event.type == MOUSEBUTTONUP:
             mousex, mousey = event.pos
-            control.vistrel(ownship, enemyship, mousex, mousey)
+            if (30 < mousey or mousey > 330) and (390 < mousex or mousex > 690):
+                control.vistrel(ownship, enemyship, mousex, mousey)
+                waitInput = False
+        if not waitInput:
             control.compTurn(enemyship,ownship)
+            waitInput = True
         pygame.display.update()
     sleep(0.05)
 
