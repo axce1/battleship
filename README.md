@@ -1,2 +1,2 @@
-Python and PyGame Battleship
+Python and PyGame Battleship.
 
