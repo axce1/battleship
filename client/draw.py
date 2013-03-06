@@ -130,9 +130,9 @@ def drawShip(display, ship, pix=0):
             DISPLAYSURF.blit(shipImage,ship_place)
 
 
-def drawAllShip(ship, pix) :
+def drawAllShip(ship) :
     for k in ship.korabli:
-        drawShip(DISPLAYSURF, k, pix)
+        drawShip(DISPLAYSURF, k)
 
 
 def drawExplosion(display, ships,pix):

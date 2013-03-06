@@ -24,7 +24,6 @@ def msgparser(connect_object, message):
     ownship = pickle.loads(message.getBody())
     draw.drawAllShip(ownship,0)
     enemyship = pickle.loads(message.getBody())
-    draw.drawAllShip(enemyship,360)
     print 'risuem hernyu'
     pygame.display.update()
 #    draw.showStartScreen()
