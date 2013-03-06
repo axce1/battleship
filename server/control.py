@@ -43,7 +43,7 @@ def checkForKeyPress():
 import pickle
 import xmpp
 
-def jabber_send(ownship):
+def jabber_send(ownship,enemyship):
     login = "bship1@default.rs"
     remote_user = "bship2@default.rs"
     password = "123456"
@@ -60,7 +60,7 @@ def jabber_send(ownship):
     for k in ownship.korabli:
         for (i,j) in k.cells:
             test.add((i,j))
-    m = pickle.dumps(ownship)
+    m = pickle.dumps([ownship,enemyship])
     mymsg=xmpp.protocol.Message(remote_user, m)
     myclient.send(mymsg)
 

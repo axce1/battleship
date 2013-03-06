@@ -19,8 +19,8 @@ OwnListShip = ownship.createListShips()
 EnemyListShip = enemyship.createListShips()
 
 draw.drawAllShip(ownship)
-control.jabber_send(ownship)
-control.jabber_send(enemyship)
+control.jabber_send(ownship,enemyship)
+#control.jabber_send(enemyship)
 waitInput = True
 
 while True:

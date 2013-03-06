@@ -21,9 +21,10 @@ password = "123456"
 jid=xmpp.protocol.JID(login)
 def msgparser(connect_object, message):
     global ownship, enemyship
-    ownship = pickle.loads(message.getBody())
-    draw.drawAllShip(ownship,0)
-    enemyship = pickle.loads(message.getBody())
+    mess = pickle.loads(message.getBody())
+    ownship =  mess[1]
+    draw.drawAllShip(ownship)
+    enemyship = mess[0]
     print 'risuem hernyu'
     pygame.display.update()
 #    draw.showStartScreen()
