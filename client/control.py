@@ -39,28 +39,3 @@ def checkForKeyPress():
     if keyUpEvents[0].key == K_ESCAPE:
         pygame.quit()
     return keyUpEvents[0].key
-
-import pickle
-import xmpp
-
-def jabber_send(ownship):
-    login = "bship1@default.rs"
-    remote_user = "bship2@default.rs"
-    password = "123456"
-
-    jid=xmpp.protocol.JID(login)
-
-    ## connect
-    myclient = xmpp.Client(jid.getDomain()) #, debug=[])
-    myclient.connect()
-    myclient.auth(jid.getNode(),password, 'BattleShip-JID1')
-
-    ## send message
-    test = set([])
-    for k in ownship.korabli:
-        for (i,j) in k.cells:
-            test.add((i,j))
-    m = pickle.dumps(ownship)
-    mymsg=xmpp.protocol.Message(remote_user, m)
-    myclient.send(mymsg)
-

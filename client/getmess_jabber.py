@@ -30,7 +30,9 @@ myclient.RegisterHandler('message', msgparser)
 myclient.sendInitPresence()
 def addset(x):
     print 'new test message def using'
-    print x
+    q=set([])
+    q.add(x)
+    print q
 ## send message
 #m ='message was send from 2 to 1'
 #mymsg=xmpp.protocol.Message(remote_user, m, 'chat')
