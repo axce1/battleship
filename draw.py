@@ -23,12 +23,23 @@ DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
 
 
 def showStartScreen():
-    titleFont = pygame.font.Font('freesansbold.ttf',50)
-    titleSurf1 = titleFont.render('Start Cool Game?',True, ENEMYSHIPCOLOR)
-    titleRect = titleSurf1.get_rect()
-    titleRect.center = (WINDOWWIDTH/2, WINDOWHEIGHT/2)
-    DISPLAYSURF.blit(titleSurf1,titleRect)
+    r = 255
+    titleFont1 = pygame.font.Font('freesansbold.ttf',50)
+    titleSurf1 = titleFont1.render('Start Cool Game?',True, ENEMYSHIPCOLOR)
+    titleRect1 = titleSurf1.get_rect()
+    titleRect1.center = (WINDOWWIDTH/2, WINDOWHEIGHT/2)
+    DISPLAYSURF.blit(titleSurf1,titleRect1)
     while True:
+        titleFont2 = pygame.font.Font('freesansbold.ttf',20)
+        titleSurf2 = titleFont2.render('Press Any Key',True, (r,0,0))
+        titleRect2 = titleSurf2.get_rect()
+        titleRect2.center = (600,330)
+        DISPLAYSURF.blit(titleSurf2,titleRect2)
+        if r == 255:
+            r1 = -0.5
+        elif r == 0:
+            r1 = 0.5
+        r = r + r1
         if control.checkForKeyPress():
             pygame.event.get()
             return
@@ -36,9 +47,11 @@ def showStartScreen():
 
 
 def drawBoard():
-
+    DISPLAYSURF.fill((0,0,0))
     boardImage = pygame.image.load('data/sea.png')
-    DISPLAYSURF.blit(boardImage,(0,0))
+    boardImage = pygame.transform.scale(boardImage, (300,300))
+    DISPLAYSURF.blit(boardImage,(30,30))
+    DISPLAYSURF.blit(boardImage,(390,30))
 
     for x in range(BOARDWIDTH + 1):
         ## draw left
