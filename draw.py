@@ -46,6 +46,16 @@ def showStartScreen():
         pygame.display.update()
 
 
+def gameOverScreen():
+    DISPLAYSURF.fill((0,0,0))
+    titleFont1 = pygame.font.Font('freesansbold.ttf',50)
+    titleSurf1 = titleFont1.render('Game Over',True, ENEMYSHIPCOLOR)
+    titleRect1 = titleSurf1.get_rect()
+    titleRect1.center = (WINDOWWIDTH/2, WINDOWHEIGHT/2)
+    DISPLAYSURF.blit(titleSurf1,titleRect1)
+    pygame.display.update()
+
+
 def drawBoard():
     DISPLAYSURF.fill((0,0,0))
     boardImage = pygame.image.load('data/sea.png')
