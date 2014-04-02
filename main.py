@@ -30,13 +30,15 @@ while True:
             sys.exit()
         if event.type == MOUSEBUTTONUP:
             mousex, mousey = event.pos
-            if (30 < mousey or mousey < 330) or (390 <  mousex and mousex < 690):
-                print mousex, mousey
+            if (30<mousey<330) and (390<mousex<690):
                 control.vistrel(ownship, enemyship, mousex, mousey)
                 if len(enemyship.shipCells()) == 0:
                     draw.gameOverScreen()
                 else:
                     waitInput = False
+            else:
+                waitInput = True
+                print ('Try again!')
             if not waitInput:
                 control.compTurn(enemyship,ownship)
                 if len(ownship.shipCells()) == 0:

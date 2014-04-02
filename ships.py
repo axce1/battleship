@@ -21,7 +21,6 @@ class Korablic(object):
         self.cells.remove(cell)
         z = self.cells
 
-
     def isDead(self):
         if len(self.cells) == 0:
             print 'korablik mertvii'
@@ -35,7 +34,7 @@ class workShip(object):
 
     def createListShips(self):
 
-        for c in range(1):
+        for c in range(4):
             ship = Korablic()
             ship.addCell(self.genDeckShip(4))
             self.korabli.append(ship)
@@ -50,7 +49,7 @@ class workShip(object):
             ship.addCell(self.genDeckShip(3))
             self.korabli.append(ship)
 
-        for c in range(4):
+        for c in range(1):
             ship = Korablic()
             ship.addCell(self.genShipPlace())
             self.korabli.append(ship)
@@ -91,7 +90,12 @@ class workShip(object):
                 allspace.add((i,j))
 
             space = allspace - (self.shipCells().union(self.placeNearShip()))
-            ship = random.sample(space, 1)
+            try:
+                ship = random.sample(space, 1)
+            except:
+                print ('корабли', ship)
+                print ('пространство', space)
+                print 'корабль уже есть в этом месте'
 
 
         return ship[0]
