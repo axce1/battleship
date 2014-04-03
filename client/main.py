@@ -22,8 +22,6 @@ def msgparser(connect_object, message):
     draw.drawAllShip(ownship)
     enemyship = mess[0]
     waitInput = mess[2]
-    print waitInput
-    print 'risuem hernyu'
     draw.reDrawAll(ownship, enemyship, draw.DISPLAYSURF)
     pygame.display.update()
 
@@ -50,8 +48,3 @@ while True:
             waitInput = True
         pygame.display.update()
     sleep(0.05)
-
-#while myclient.Process(1):
-#    pass
-
-

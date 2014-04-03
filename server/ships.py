@@ -37,22 +37,22 @@ class workShip(object):
 
         for c in range(4):
             ship = Korablic()
-            ship.addCell(self.genDeckShip(4))
+            ship.addCell(self.genShipPlace())
             self.korabli.append(ship)
 
         for c in range(3):
             ship = Korablic()
-            ship.addCell(self.genDeckShip(2))
+            ship.addCell(self.genDeckShip(3))
             self.korabli.append(ship)
 
         for c in range(2):
             ship = Korablic()
-            ship.addCell(self.genDeckShip(3))
+            ship.addCell(self.genDeckShip(2))
             self.korabli.append(ship)
 
         for c in range(1):
             ship = Korablic()
-            ship.addCell(self.genShipPlace())
+            ship.addCell(self.genDeckShip(4))
             self.korabli.append(ship)
 
 

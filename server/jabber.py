@@ -17,18 +17,15 @@ remote_user = "bship2@default.rs"
 password = "123456"
 
 
-def msgparser(connect_object, message):
-    global ownship, enemyship, waitInput
-    mess = pickle.loads(message.getBody())
-    ownship =  mess[1]
-    draw.drawAllShip(ownship)
-    enemyship = mess[0]
-    print (enemyship.bumspace)
-    waitInput = mess[2]
-    print waitInput
-    print 'risuem hernyu'
-    draw.reDrawAll(ownship, enemyship, draw.DISPLAYSURF)
-    pygame.display.update()
+#def msgparser(connect_object, message):
+#    global ownship, enemyship, waitInput
+#    mess = pickle.loads(message.getBody())
+#    ownship =  mess[1]
+#    draw.drawAllShip(ownship)
+#    enemyship = mess[0]
+#    waitInput = mess[2]
+#    draw.reDrawAll(ownship, enemyship, draw.DISPLAYSURF)
+#    pygame.display.update()
 
 
 def jinstance():
@@ -39,7 +36,7 @@ def jinstance():
     client = xmpp.Client(jid.getDomain(), debug=[])
     client.connect()
     client.auth(jid.getNode(), password, 'BattleShip-JID1')
-    client.RegisterHandler('message', msgparser)
+    #client.RegisterHandler('message', msgparser)
     client.sendInitPresence()
 
     return client

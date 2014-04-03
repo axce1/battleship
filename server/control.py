@@ -9,8 +9,8 @@ def vistrel(ownship, enemyship, mx, my):
     x = my/30 - 1
     enemyship.delFromKorabli(x,y)
     bumbum(enemyship,x,y)
-    print (ownship.bumspace)
-    print (enemyship.bumspace)
+    #bumbum(ownship, x, y)
+    #print (enemyship.bumspace)
     draw.reDrawAll(ownship, enemyship, draw.DISPLAYSURF)
 
 
@@ -47,8 +47,6 @@ import xmpp
 
 def jabber_send(cclient, ownship,enemyship,wait):
     remote_user = "bship2@default.rs"
-    print (ownship.bumspace)
-    print (enemyship.bumspace)
     m = pickle.dumps([ownship,enemyship,wait])
     mymsg=xmpp.protocol.Message(remote_user, m)
     cclient.send(mymsg)

@@ -6,6 +6,7 @@ import control
 import pygame
 import sys
 
+import pickle
 from jabber import jinstance
 
 owncolor = draw.OWNSHIPCOLOR
@@ -20,11 +21,21 @@ enemyship = ships.workShip()
 OwnListShip = ownship.createListShips()
 EnemyListShip = enemyship.createListShips()
 
+def msgparser(connect_object, message):
+    global ownship, enemyship, waitInput
+    mess = pickle.loads(message.getBody())
+    ownship =  mess[1]
+    draw.drawAllShip(ownship)
+    enemyship = mess[0]
+    waitInput = mess[2]
+    draw.reDrawAll(ownship, enemyship, draw.DISPLAYSURF)
+    pygame.display.update()
+
+
 draw.drawAllShip(ownship)
 c = jinstance()
+c.RegisterHandler('message', msgparser)
 control.jabber_send(c, ownship, enemyship, wait=False)
-#control.jabber_send(ownship,enemyship,wait=False)
-#control.jabber_send(enemyship)
 waitInput = True
 
 while True:
