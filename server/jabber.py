@@ -7,32 +7,39 @@
 
 import pickle
 import xmpp
+import pygame
+
+import draw
+
 
 login = "bship1@default.rs"
 remote_user = "bship2@default.rs"
 password = "123456"
 
-jid=xmpp.protocol.JID(login)
 
 def msgparser(connect_object, message):
-    str(message.getBody())
+    global ownship, enemyship, waitInput
+    mess = pickle.loads(message.getBody())
+    ownship =  mess[1]
+    draw.drawAllShip(ownship)
+    enemyship = mess[0]
+    print (enemyship.bumspace)
+    waitInput = mess[2]
+    print waitInput
+    print 'risuem hernyu'
+    draw.reDrawAll(ownship, enemyship, draw.DISPLAYSURF)
+    pygame.display.update()
 
 
-## connect
-myclient = xmpp.Client(jid.getDomain()) #, debug=[])
-myclient.connect()
-myclient.auth(jid.getNode(),password, 'BattleShip-JID1')
+def jinstance():
+    #login = 'bship1@default.rs'
+    #server = 'default.rs'
+    #password = '123456'
+    jid = xmpp.protocol.JID(login)
+    client = xmpp.Client(jid.getDomain(), debug=[])
+    client.connect()
+    client.auth(jid.getNode(), password, 'BattleShip-JID1')
+    client.RegisterHandler('message', msgparser)
+    client.sendInitPresence()
 
-#myclient.RegisterHandler('message', msgparser)
-
-#myclient.sendInitPresence()
-
-
-#while myclient.Process(1):
-#    pass
-
-## send message
-m = pickle.dumps((9,0))
-mymsg=xmpp.protocol.Message(remote_user, m)
-myclient.send(mymsg)
-
+    return client

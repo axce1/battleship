@@ -4,12 +4,14 @@ import pygame
 from pygame.locals import *
 
 
-def vistrel(ownship, ship, mx, my):
+def vistrel(ownship, enemyship, mx, my):
     y = (mx-390)/30
     x = my/30 - 1
-    ship.delFromKorabli(x,y)
-    bumbum(ship,x,y)
-    draw.reDrawAll(ownship, ship, draw.DISPLAYSURF)
+    enemyship.delFromKorabli(x,y)
+    bumbum(enemyship,x,y)
+    print (ownship.bumspace)
+    print (enemyship.bumspace)
+    draw.reDrawAll(ownship, enemyship, draw.DISPLAYSURF)
 
 
 def compTurn(enemyship,ship):
@@ -43,24 +45,11 @@ def checkForKeyPress():
 import pickle
 import xmpp
 
-def jabber_send(ownship,enemyship):
-    login = "bship1@default.rs"
+def jabber_send(cclient, ownship,enemyship,wait):
     remote_user = "bship2@default.rs"
-    password = "123456"
-
-    jid=xmpp.protocol.JID(login)
-
-    ## connect
-    myclient = xmpp.Client(jid.getDomain()) #, debug=[])
-    myclient.connect()
-    myclient.auth(jid.getNode(),password, 'BattleShip-JID1')
-
-    ## send message
-    test = set([])
-    for k in ownship.korabli:
-        for (i,j) in k.cells:
-            test.add((i,j))
-    m = pickle.dumps([ownship,enemyship])
+    print (ownship.bumspace)
+    print (enemyship.bumspace)
+    m = pickle.dumps([ownship,enemyship,wait])
     mymsg=xmpp.protocol.Message(remote_user, m)
-    myclient.send(mymsg)
+    cclient.send(mymsg)
 

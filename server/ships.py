@@ -35,7 +35,7 @@ class workShip(object):
 
     def createListShips(self):
 
-        for c in range(1):
+        for c in range(4):
             ship = Korablic()
             ship.addCell(self.genDeckShip(4))
             self.korabli.append(ship)
@@ -50,7 +50,7 @@ class workShip(object):
             ship.addCell(self.genDeckShip(3))
             self.korabli.append(ship)
 
-        for c in range(4):
+        for c in range(1):
             ship = Korablic()
             ship.addCell(self.genShipPlace())
             self.korabli.append(ship)

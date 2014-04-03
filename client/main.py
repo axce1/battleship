@@ -10,45 +10,28 @@ import sys
 draw.showStartScreen()
 draw.drawBoard()
 ###
-import xmpp
+
+from jabber import jinstance
 import pickle
 
-login = "bship2@default.rs"
-remote_user = "bship1@default.rs"
-server = "default.rs"
-password = "123456"
 
-jid=xmpp.protocol.JID(login)
 def msgparser(connect_object, message):
-    global ownship, enemyship
+    global ownship, enemyship, waitInput
     mess = pickle.loads(message.getBody())
     ownship =  mess[1]
     draw.drawAllShip(ownship)
     enemyship = mess[0]
+    waitInput = mess[2]
+    print waitInput
     print 'risuem hernyu'
+    draw.reDrawAll(ownship, enemyship, draw.DISPLAYSURF)
     pygame.display.update()
-#    draw.showStartScreen()
 
 
-## connect
-myclient = xmpp.Client(server) #, debug=[])
-myclient.connect()
-myclient.auth(jid.getNode(),password, 'BattleShip-JID2')
-
+myclient = jinstance()
 myclient.RegisterHandler('message', msgparser)
 
-myclient.sendInitPresence()
-
-
-#ownship = ships.workShip()
-#enemyship = ships.workShip()
-
-#OwnListShip = ownship.createListShips()
-#EnemyListShip = enemyship.createListShips()
-
-#draw.drawAllShip(ownship)
-
-waitInput = True
+waitInput = False
 
 while True:
     myclient.Process(1)
@@ -58,11 +41,12 @@ while True:
             sys.exit()
         if event.type == MOUSEBUTTONUP:
             mousex, mousey = event.pos
-            if (30 < mousey or mousey > 330) and (390 < mousex or mousex > 690):
+            if (30<mousey<330) and (390<mousex<690):
                 control.vistrel(ownship, enemyship, mousex, mousey)
+                control.jabber_send(myclient, ownship, enemyship, wait=True)
                 waitInput = False
         if not waitInput:
-            control.compTurn(enemyship,ownship)
+            #control.compTurn(enemyship,ownship)
             waitInput = True
         pygame.display.update()
     sleep(0.05)
